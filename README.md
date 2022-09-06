@@ -1,16 +1,38 @@
-# one_for_twelve
+## Intro
 
-A new Flutter project.
+Flutter version of the popular Dutch TV game show 'Twee voor 12'
 
-## Getting Started
+## Initial creation
 
-This project is a starting point for a Flutter application.
+Create app:
 
-A few resources to get you started if this is your first Flutter project:
+```
+flutter create one_for_twelve
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Using Firebase
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+In any directory run:
+
+```
+npm install -g firebase-tools (install firebase cli)
+firebase login
+dart pub global activate flutterfire_cli
+```
+
+Create project in the firebase console manually (one-for-12).
+
+Then in project root run:
+
+```
+flutter pub add firebase_core
+flutterfire configure (choose project one-for-twelve)
+```
+
+Now update the main.dart file so firebase is initialised when the app loads.
+
+Test in all configurations: chrome, ios, android & macOS. In my case everything except macOS worked. For macOS I got a message:
+
+Update the `platform :osx, '10.11'` line in your macOS/Podfile to version `10.12`
+
+After doing this it worked on macOS as well.
