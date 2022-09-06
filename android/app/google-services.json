@@ -29,6 +29,13 @@
             {
               "client_id": "896308618203-bs063tm83hula1t5mn96dhcgd1k6ggn5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "896308618203-36agrfena93gc46heuhva43chrhdhvv2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.oneForTwelve"
+              }
             }
           ]
         }
