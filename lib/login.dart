@@ -46,10 +46,13 @@ class Login extends StatelessWidget {
           child: const Text('Login with email & pwd'),
           onPressed: () => signInWithUsernamePassword(),
         ),
-        ElevatedButton(
-          child: const Text('Login with Google'),
-          onPressed: () => signInWithGoogle(),
-        )
+        if (defaultTargetPlatform == TargetPlatform.android ||
+            defaultTargetPlatform == TargetPlatform.iOS) ...[
+          ElevatedButton(
+            child: const Text('Login with Google'),
+            onPressed: () => signInWithGoogle(),
+          )
+        ]
       ],
     );
   }
