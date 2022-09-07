@@ -59,7 +59,7 @@ class AuthScreen extends StatelessWidget {
   Widget _buildLoggedInColumn(BuildContext ctx, GameUser user) {
     return Column(
       children: [
-        Text('Logged on at ${user.providerName} with ${user.displayName}'),
+        Text('Logged on using ${user.providerName} as ${user.displayName}'),
         const SizedBox(
           height: 10,
         ),
