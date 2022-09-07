@@ -33,5 +33,5 @@ class SettingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool get darkTheme => false;
+  bool get darkTheme => true;
 }

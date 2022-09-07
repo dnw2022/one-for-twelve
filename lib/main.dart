@@ -79,6 +79,25 @@ class _MyAppState extends State<MyApp> {
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
+                  theme: ThemeData(
+                    brightness: Brightness.light,
+                    primarySwatch: Colors.blue,
+                  ),
+                  darkTheme: ThemeData(
+                    scaffoldBackgroundColor: Colors.black,
+                    backgroundColor: Colors.black,
+                    primaryColor: Colors.blue,
+                    colorScheme: ColorScheme.fromSwatch().copyWith(
+                      primary: Colors.black,
+                      secondary: Colors.blue,
+                      brightness: Brightness.dark,
+                    ),
+                    appBarTheme: const AppBarTheme(
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white),
+                  ),
+                  themeMode:
+                      settings.darkTheme ? ThemeMode.dark : ThemeMode.light,
                   onGenerateRoute: (routeSettings) {
                     if (routeSettings.name == "/home") {
                       return PageRouteBuilder(
