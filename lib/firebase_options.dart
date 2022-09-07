@@ -66,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '896308618203',
     projectId: 'one-for-twelve-32778',
     storageBucket: 'one-for-twelve-32778.appspot.com',
+    androidClientId: '896308618203-38afo5rt980cpf0cn4p7roiguhqqrta5.apps.googleusercontent.com',
     iosClientId: '896308618203-36agrfena93gc46heuhva43chrhdhvv2.apps.googleusercontent.com',
     iosBundleId: 'com.example.oneForTwelve',
   );
@@ -76,6 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '896308618203',
     projectId: 'one-for-twelve-32778',
     storageBucket: 'one-for-twelve-32778.appspot.com',
+    androidClientId: '896308618203-38afo5rt980cpf0cn4p7roiguhqqrta5.apps.googleusercontent.com',
     iosClientId: '896308618203-36agrfena93gc46heuhva43chrhdhvv2.apps.googleusercontent.com',
     iosBundleId: 'com.example.oneForTwelve',
   );

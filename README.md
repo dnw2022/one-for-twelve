@@ -99,3 +99,9 @@ https://pub.dev/packages/flutterfire_ui/example
 ## Next steps
 
 Added Splash Screen
+
+## Troubleshooting
+
+When enabling a firebase feature you must run 'flutterfire configure' again.
+
+When using the firebase emulators for lambda functions the projectId must be specified in the .firebaserc file in the project root. The projectId becomes part of the url.
