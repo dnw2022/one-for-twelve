@@ -25,8 +25,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<FirebaseApp> initFirebase() async {
+  Future<FirebaseApp> init() async {
     await Future.delayed(const Duration(seconds: 1));
+    await SettingsProvider.loadPreferences();
 
     final app = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: initFirebase(),
+        future: init(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
