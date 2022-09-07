@@ -4,15 +4,18 @@ import '../models/game_user.dart';
 import '../services/auth.dart';
 
 import './settings_screen.dart';
+import '../app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final text = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('1 for 12'),
+        title: Text(text.translate('homescreen.appbar.title')),
         centerTitle: true,
         titleSpacing: 8,
         leading: FutureBuilder<GameUser?>(
@@ -51,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                         Icon(Icons.settings,
                             color: Theme.of(context).iconTheme.color),
                         const SizedBox(width: 5),
-                        const Text('settings'),
+                        Text(text.translate('settings')),
                       ],
                     ),
                   ),
@@ -63,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                           Icon(Icons.build,
                               color: Theme.of(context).iconTheme.color),
                           const SizedBox(width: 5),
-                          const Text('administration'),
+                          Text(text.translate('administration')),
                         ],
                       ),
                     )
@@ -88,7 +91,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 ElevatedButton(
-                  child: const Text('Start game'),
+                  child: Text(text.translate('start_game_text')),
                   onPressed: () async {},
                 ),
                 const Flexible(
@@ -96,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                     image: AssetImage('assets/homer_desperate.png'),
                   ),
                 ),
-                const Text('homescreen.subtitle'),
+                Text(text.translate('homescreen.subtitle')),
               ],
             ),
           ),

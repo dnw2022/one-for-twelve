@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import './firebase_options.dart';
+import './app_localizations.dart';
+import './settings_provider.dart';
 
 import './screens/splash_screen.dart';
 import './screens/auth_screen.dart';
@@ -21,7 +25,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<FirebaseApp> initApp() async {
+  Future<FirebaseApp> initFirebase() async {
     await Future.delayed(const Duration(seconds: 1));
 
     final app = await Firebase.initializeApp(
@@ -46,31 +50,48 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      onGenerateRoute: (routeSettings) {
-        if (routeSettings.name == "/home") {
-          return PageRouteBuilder(
-            pageBuilder: (_, a1, a2) => _buildHomeScreen(),
-          );
-        }
+    return FutureBuilder(
+        future: initFirebase(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-        return null;
-      },
-      home: FutureBuilder(
-          future: initApp(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            } else if (snapshot.hasData) {
-              return _buildHomeScreen();
-            } else {
-              return const Center(child: SplashScreen());
-            }
-          }),
-    );
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider<SettingsProvider>(
+                create: (_) {
+                  return SettingsProvider();
+                },
+              )
+            ],
+            child: Consumer<SettingsProvider>(
+              builder:
+                  (BuildContext ctx, SettingsProvider settings, Widget? child) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  locale: settings.locale,
+                  supportedLocales: SettingsProvider.getSupportedLocales(),
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  onGenerateRoute: (routeSettings) {
+                    if (routeSettings.name == "/home") {
+                      return PageRouteBuilder(
+                        pageBuilder: (_, a1, a2) => _buildHomeScreen(),
+                      );
+                    }
+
+                    return null;
+                  },
+                  home: _buildHomeScreen(),
+                );
+              },
+            ),
+          );
+        });
   }
 }

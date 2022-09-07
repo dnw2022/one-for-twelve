@@ -1,12 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:one_for_twelve/screens/languages_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../services/auth.dart';
 import '../widgets/size_config.dart';
+import '../app_localizations.dart';
+import '../settings_provider.dart';
+import '../models/game_user.dart';
 
 import './auth_screen.dart';
-import '../models/game_user.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -39,11 +43,15 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final sizeConfig = SizeConfig(context);
+    final text = AppLocalizations.of(context);
 
     final appBar = AppBar(
-      title: const Text('settings'),
+      title: Text(text.translate('settings')),
       centerTitle: true,
     );
+
+    final settingsProvider =
+        Provider.of<SettingsProvider>(context, listen: false);
 
     return Scaffold(
       appBar: appBar,
@@ -71,15 +79,37 @@ class SettingsScreenState extends State<SettingsScreen> {
                           title: const Text('ACCOUNT'),
                           tiles: [
                             SettingsTile(
-                              title: const Text('Account'),
-                              description: user?.providerName == null
-                                  ? const Text('not_logged_on')
+                              title: user?.providerName == null
+                                  ? const Text('')
                                   : Text(user!.providerName),
+                              value: user?.providerName == null
+                                  ? Text(text.translate('not_logged_on'))
+                                  : Text(user!.displayName),
                               leading: _getAccountLeading(user),
                               onPressed: (_) {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         AuthScreen(user)));
+                              },
+                            ),
+                          ],
+                        ),
+                        SettingsSection(
+                          title: Text(text.translate('language').toUpperCase()),
+                          tiles: [
+                            SettingsTile(
+                              title: Text(text.translate('language')),
+                              value: Text(text.translate(
+                                  'language_${settingsProvider.locale.languageCode}')),
+                              leading: const Icon(Icons.language),
+                              onPressed: (_) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        LanguagesScreen(
+                                            settingsProvider
+                                                .locale.languageCode,
+                                            (l) => settingsProvider
+                                                .setLocale(l))));
                               },
                             ),
                           ],
