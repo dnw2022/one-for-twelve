@@ -6,6 +6,8 @@ import './firebase_options.dart';
 import './login.dart';
 import './profile.dart';
 
+import './screens/splash_screen.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
             } else if (snapshot.hasData) {
               return const MyHomePage(title: 'Flutter Demo Home Page');
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: SplashScreen());
             }
           }),
     );

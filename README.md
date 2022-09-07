@@ -95,3 +95,7 @@ For macOS it is a bit more involved and you need a different package:
 
 https://github.com/flutter/flutter/issues/46157
 https://pub.dev/packages/flutterfire_ui/example
+
+## Next steps
+
+Added Splash Screen
