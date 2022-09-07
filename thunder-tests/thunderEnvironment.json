@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "_id": "e73c8c53-cd8c-4cf8-acda-27a963e03737",
+    "name": "Local",
+    "default": true,
+    "sortNum": 20000,
+    "created": "2022-09-07T04:19:12.964Z",
+    "modified": "2022-09-07T04:23:44.312Z",
+    "data": [
+      {
+        "name": "AWS_LAMBDA_LOCAL_BASE_URL",
+        "value": "http://localhost:5001/one-for-twelve-32778/europe-west3/"
+      }
+    ]
+  }
+]

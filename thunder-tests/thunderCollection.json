@@ -1,9 +1,14 @@
 [
   {
     "_id": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "colName": "Function Tests",
+    "colName": "Local Function Tests",
     "created": "2022-09-01T23:46:33.032Z",
     "sortNum": 10000,
-    "folders": []
+    "folders": [],
+    "settings": {
+      "headers": [],
+      "tests": [],
+      "envId": "e73c8c53-cd8c-4cf8-acda-27a963e03737"
+    }
   }
 ]
