@@ -105,3 +105,10 @@ Added Splash Screen
 When enabling a firebase feature you must run 'flutterfire configure' again.
 
 When using the firebase emulators for lambda functions the projectId must be specified in the .firebaserc file in the project root. The projectId becomes part of the url.
+
+# Speeding up the xcode build for ios & macOS
+
+If you use firebase, about 500k of c++ have to be compiled. To speed up the build you can use the precompiled code from git. See:
+
+https://firebase.google.com/docs/firestore/quickstart
+https://github.com/firebase/flutterfire/issues/9015
