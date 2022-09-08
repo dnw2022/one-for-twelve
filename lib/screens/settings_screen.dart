@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_for_twelve/screens/languages_screen.dart';
+import 'package:one_for_twelve/screens/question_selection_strategies_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -93,6 +94,78 @@ class SettingsScreenState extends State<SettingsScreen> {
                                         AuthScreen(user)));
                               },
                             ),
+                          ],
+                        ),
+                        SettingsSection(
+                          title: Text(text.translate('games')),
+                          tiles: [
+                            SettingsTile(
+                              title: Text(text.translate('language')),
+                              value: Text(text.translate(
+                                  'language_${user!.gameSettings.languageCode}')),
+                              leading: const Icon(Icons.language),
+                              onPressed: (_) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        LanguagesScreen(
+                                      user.gameSettings.languageCode,
+                                      (locale) async {
+                                        await user.gameSettings.setLanguageCode(
+                                            locale.languageCode);
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            SettingsTile(
+                              title: Text(text.translate('game_level')),
+                              value: Text(text.translate(
+                                  'game_level_${user.gameSettings.questionSelectionStrategy.index}')),
+                              leading: const Icon(FontAwesomeIcons.brain),
+                              onPressed: (_) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        QuestionSelectionStrategiesScreen(
+                                            user.gameSettings
+                                                .questionSelectionStrategy,
+                                            (strategy) {
+                                          user.gameSettings
+                                              .setQuestionSelectionStrategy(
+                                                  strategy);
+                                          setState(() {});
+                                        })));
+                              },
+                            ),
+                            SettingsTile.switchTile(
+                              title: Text(
+                                  text.translate('show_game_selection_screen')),
+                              leading:
+                                  const Icon(FontAwesomeIcons.accessibleIcon),
+                              initialValue:
+                                  user.gameSettings.showGameSelectionScreen,
+                              onToggle: (bool value) async {
+                                await user.gameSettings
+                                    .setShowGameSelectionScreen(value);
+                                setState(() {});
+                              },
+                            ),
+                            if (user.hasSubscription)
+                              SettingsTile.switchTile(
+                                title:
+                                    Text(text.translate('unrevised_questions')),
+                                leading:
+                                    const Icon(FontAwesomeIcons.questionCircle),
+                                initialValue:
+                                    user.gameSettings.showUnrevisedQuestions,
+                                onToggle: (bool value) async {
+                                  await user.gameSettings
+                                      .setShowUnrevisedQuestions(value);
+                                  setState(() {});
+                                },
+                              ),
                           ],
                         ),
                         SettingsSection(

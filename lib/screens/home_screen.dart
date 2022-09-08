@@ -9,11 +9,23 @@ import '../services/game_factory.dart';
 
 import './settings_screen.dart';
 import './game_screen.dart';
+import './choose_game_screen.dart';
 
 import '../app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  void _chooseGame(BuildContext context) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute<GameScreen>(
+        builder: (_) {
+          return ChooseGameScreen();
+        },
+      ),
+    );
+  }
 
   void _startGame(BuildContext context, GameUser user) async {
     try {
@@ -127,7 +139,11 @@ class HomeScreen extends StatelessWidget {
                   child: Text(text.translate('start_game_text')),
                   onPressed: () async {
                     final user = await Auth.instance.getCurrentUser();
-                    _startGame(context, user!);
+                    if (user!.gameSettings.showGameSelectionScreen) {
+                      _chooseGame(context);
+                    } else {
+                      _startGame(context, user);
+                    }
                   },
                 ),
                 const Flexible(
