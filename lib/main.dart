@@ -25,10 +25,31 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<FirebaseApp> init() async {
-    await Future.delayed(const Duration(seconds: 1));
-    await SettingsProvider.loadPreferences();
+  final _settingsProvider = SettingsProvider();
 
+  @override
+  void initState() {
+    super.initState();
+
+    SettingsProvider.loadPreferences();
+
+    final window = WidgetsBinding.instance.window;
+    setPlatformBrightness(window.platformBrightness);
+
+    window.onPlatformBrightnessChanged = () {
+      setPlatformBrightness(window.platformBrightness);
+    };
+
+    window.onLocaleChanged = () {
+      _settingsProvider.setLocale(window.locale);
+    };
+  }
+
+  void setPlatformBrightness(Brightness brightness) {
+    _settingsProvider.setPlatformBrightness(brightness);
+  }
+
+  Future<FirebaseApp> init() async {
     final app = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
@@ -62,7 +83,7 @@ class _MyAppState extends State<MyApp> {
             providers: [
               ChangeNotifierProvider<SettingsProvider>(
                 create: (_) {
-                  return SettingsProvider();
+                  return _settingsProvider;
                 },
               )
             ],
@@ -96,8 +117,7 @@ class _MyAppState extends State<MyApp> {
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white),
                   ),
-                  themeMode:
-                      settings.darkTheme ? ThemeMode.dark : ThemeMode.light,
+                  themeMode: settings.themeMode,
                   onGenerateRoute: (routeSettings) {
                     if (routeSettings.name == "/home") {
                       return PageRouteBuilder(

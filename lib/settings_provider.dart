@@ -33,5 +33,36 @@ class SettingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool get darkTheme => true;
+  bool get isBrightnessBasedOnPhone =>
+      _prefs?.getBool('isBrightnessBasedOnPhone') ?? true;
+  Future<void> setIsBrightnessBasedOnPhone(bool value) async {
+    await _prefs?.setBool('isBrightnessBasedOnPhone', value);
+    notifyListeners();
+  }
+
+  static Brightness _platformBrightness = Brightness.light;
+  void setPlatformBrightness(Brightness brightness) {
+    _platformBrightness = brightness;
+
+    if (isBrightnessBasedOnPhone) {
+      print('notifyListeners');
+      notifyListeners();
+    }
+  }
+
+  bool get useDarkMode => _prefs?.getBool('useDarkMode') ?? true;
+  Future<void> setUseDarkMode(bool value) async {
+    _prefs?.setBool('useDarkMode', value);
+    notifyListeners();
+  }
+
+  ThemeMode get themeMode {
+    if (isBrightnessBasedOnPhone) {
+      return _platformBrightness == Brightness.dark
+          ? ThemeMode.dark
+          : ThemeMode.light;
+    }
+
+    return useDarkMode ? ThemeMode.dark : ThemeMode.light;
+  }
 }
