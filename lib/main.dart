@@ -95,17 +95,19 @@ class _MyAppState extends State<MyApp> {
               brightness: Brightness.light,
               primarySwatch: Colors.blue,
             ),
-            darkTheme: ThemeData(
-              scaffoldBackgroundColor: Colors.black,
-              backgroundColor: Colors.black,
-              primaryColor: Colors.blue,
-              colorScheme: ColorScheme.fromSwatch().copyWith(
-                primary: Colors.black,
-                secondary: Colors.blue,
-                brightness: Brightness.dark,
+            darkTheme: ThemeData.from(
+              colorScheme: const ColorScheme.dark(),
+            ).copyWith(
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue, // foreground
+                ),
               ),
               appBarTheme: const AppBarTheme(
-                  backgroundColor: Colors.blue, foregroundColor: Colors.white),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+              ),
             ),
             themeMode: settings.themeMode,
             onGenerateRoute: (routeSettings) {
