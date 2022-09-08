@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../app_localizations.dart';
+
 import '../models/game.dart';
+
 import '../widgets/size_config.dart';
+import '../widgets/word.dart';
+import '../widgets/current_question.dart';
+import '../widgets/question_answer.dart';
+
+import './guess_word_screen.dart';
+import './game_result_screen.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -14,22 +23,60 @@ class GameScreen extends StatefulWidget {
 }
 
 class GameScreenState extends State<GameScreen> {
+  Future<void> questionAnswered(Game game, String answer) async {
+    _continueWithNextQuestion(game, answer);
+  }
+
+  void _continueWithNextQuestion(Game game, String answer) {
+    if (!game.nextQuestion(answer)) {
+      if (game.wordWasGuessed) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute<GameResultScreen>(
+            builder: (_) {
+              return ChangeNotifierProvider<Game>.value(
+                value: game,
+                child: const GameResultScreen(),
+              );
+            },
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute<GuessWordScreen>(
+            builder: (_) {
+              return ChangeNotifierProvider<Game>.value(
+                value: game,
+                child: const GuessWordScreen(),
+              );
+            },
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final text = AppLocalizations.of(context);
+
     final sizeConfig = SizeConfig(context);
 
     return Consumer<Game>(builder: (_, game, __) {
       final appBar = AppBar(
         automaticallyImplyLeading: false,
         leading: Container(),
-        title: const Text('Game'),
+        title: Text(game.wordWasGuessed
+            ? text.translate('the_correct_answers')
+            : text.translate('there_we_go')),
         centerTitle: true,
         actions: [
           GestureDetector(
             onTap: () => Navigator.of(context).pushReplacementNamed('/home'),
-            child: const Tooltip(
-              message: 'Cancel game',
-              child: Padding(
+            child: Tooltip(
+              message: text.translate('cancel_game'),
+              child: const Padding(
                 padding: EdgeInsets.only(right: 8.0),
                 child: Icon(
                   Icons.exit_to_app,
@@ -53,7 +100,27 @@ class GameScreenState extends State<GameScreen> {
                   appBar.preferredSize.height,
               child: Column(
                 children: <Widget>[
-                  Text(game.word!),
+                  Word(game),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(20.0),
+                      child: CurrentQuestion(
+                        game.currentQuestion.question,
+                        key: ValueKey(game.currentQuestion.number.toString()),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: QuestionAnswer(
+                        game.currentQuestion,
+                        (answer) async => await questionAnswered(game, answer),
+                        text.translate('next_question'),
+                        answer: game.wordWasGuessed
+                            ? game.currentQuestion.question.answer
+                            : null,
+                        key: ValueKey(game.currentQuestion.number.toString())),
+                  )
                 ],
               ),
             ),

@@ -48,6 +48,10 @@ dependencies:
   provider: ^6.0.3
   font_awesome_flutter: ^9.2.0
   cloud_functions: ^3.3.6
+  video_player: ^2.4.7
+  http: ^0.13.5
+  youtube_explode_dart: ^1.12.0
+  dotted_border: ^2.0.0+2
 
 dev_dependencies:
   flutter_test:
@@ -75,7 +79,43 @@ flutter:
     - i18n/en.json
     - i18n/nl.json
     - assets/config/
+    - assets/rambutan.png
+    - assets/star.png
+    - assets/piranha.png
+    - assets/markle.png
+    - assets/scienceormaths.png
+    - assets/maths.png
+    - assets/sports.png
+    - assets/politics.png
+    - assets/music.png
+    - assets/books.png
+    - assets/art.png
+    - assets/history.png
+    - assets/economy.png
+    - assets/biology.png
+    - assets/bible.png
+    - assets/geography.png
+    - assets/literature.png
+    - assets/question_mark.png
+    - assets/guess_word.mp4
+    - assets/bryant.png
+    - assets/clooney.png
+    - assets/cryptic.png
+    - assets/fotosynthese.png
+    - assets/fuji.png
+    - assets/hoffman.png
+    - assets/rafflesia.png
+    - assets/sashimi.png
+    - assets/ukulele.png
+    - assets/crying_emoji.png
+    - assets/happy_balloon_emoji.png
+    - assets/happy_emoji.png
+    - assets/happy_jump_small.png
+    - assets/sad_emoji.png
+    - assets/sad_pixar.png
     - assets/homer_desperate.png
+    - assets/homer_happy.png
+    - assets/homer_quiz.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
