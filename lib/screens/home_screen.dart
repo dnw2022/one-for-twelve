@@ -1,13 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/game_user.dart';
+import '../models/game.dart';
+
 import '../services/auth.dart';
+import '../services/game_factory.dart';
 
 import './settings_screen.dart';
+import './game_screen.dart';
+
 import '../app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  void _startGame(BuildContext context, GameUser user) async {
+    try {
+      final game = await GameFactory.createDemoNl();
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute<GameScreen>(
+          builder: (_) {
+            return ChangeNotifierProvider<Game>.value(
+              value: game,
+              child: GameScreen(),
+            );
+          },
+        ),
+      );
+    } on Exception catch (ex) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: Text(ex.toString()),
+            );
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +125,10 @@ class HomeScreen extends StatelessWidget {
               children: <Widget>[
                 ElevatedButton(
                   child: Text(text.translate('start_game_text')),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    final user = await Auth.instance.getCurrentUser();
+                    _startGame(context, user!);
+                  },
                 ),
                 const Flexible(
                   child: Image(
