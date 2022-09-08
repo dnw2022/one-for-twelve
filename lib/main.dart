@@ -13,11 +13,26 @@ import './screens/auth_screen.dart';
 import './screens/home_screen.dart';
 
 Future<void> main() async {
-  final settingsProvider = SettingsProvider();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final window = WidgetsBinding.instance.window;
+
+  await SettingsProvider.loadPreferences(window.locale.languageCode);
+
+  final settingsProvider = SettingsProvider();
+  settingsProvider.setPlatformBrightness(window.platformBrightness);
+
+  window.onPlatformBrightnessChanged = () {
+    settingsProvider.setPlatformBrightness(window.platformBrightness);
+  };
+
+  window.onLocaleChanged = () {
+    settingsProvider.setLocale(window.locale, saveInPrefs: false);
+  };
+
   runApp(MyApp(settingsProvider));
 }
 
@@ -36,23 +51,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
-    SettingsProvider.loadPreferences();
-
-    final window = WidgetsBinding.instance.window;
-    setPlatformBrightness(window.platformBrightness);
-
-    window.onPlatformBrightnessChanged = () {
-      setPlatformBrightness(window.platformBrightness);
-    };
-
-    window.onLocaleChanged = () {
-      _settingsProvider.setLocale(window.locale);
-    };
-  }
-
-  void setPlatformBrightness(Brightness brightness) {
-    _settingsProvider.setPlatformBrightness(brightness);
   }
 
   Widget _buildHomeScreen() {

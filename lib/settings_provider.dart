@@ -3,34 +3,48 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider with ChangeNotifier {
   static SharedPreferences? _prefs;
+  static String _defaultLanguageCode = getSupportedLocales().first.languageCode;
 
-  static Future<void> loadPreferences() async {
+  static Future<void> loadPreferences(String deviceLanguageCode) async {
     _prefs = await SharedPreferences.getInstance();
+
+    if (_isSupportedLanguageCode(deviceLanguageCode)) {
+      _defaultLanguageCode = deviceLanguageCode;
+    }
   }
 
   static List<Locale> getSupportedLocales() {
     return [
-      const Locale('nl'),
       const Locale('en'),
+      const Locale('nl'),
     ];
   }
 
   Locale get locale {
-    final languageCode = _prefs?.getString('language_code') ??
-        getSupportedLocales().first.languageCode;
+    final languageCode =
+        _prefs?.getString('languageCode') ?? _defaultLanguageCode;
     return Locale(languageCode);
   }
 
-  Future<void> setLocale(Locale newLocale) async {
+  Future<void> setLocale(
+    Locale newLocale, {
+    bool saveInPrefs = true,
+  }) async {
     if (locale.languageCode == newLocale.languageCode) return;
-    if (!getSupportedLocales()
-        .any((l) => l.languageCode == newLocale.languageCode)) {
+
+    if (!_isSupportedLanguageCode(newLocale.languageCode)) {
       return;
     }
 
-    await _prefs?.setString('language_code', newLocale.languageCode);
+    if (saveInPrefs) {
+      await _prefs?.setString('languageCode', newLocale.languageCode);
+    }
 
     notifyListeners();
+  }
+
+  static bool _isSupportedLanguageCode(String languageCode) {
+    return getSupportedLocales().any((l) => l.languageCode == languageCode);
   }
 
   bool get isBrightnessBasedOnPhone =>
