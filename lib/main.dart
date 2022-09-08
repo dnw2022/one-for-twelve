@@ -13,19 +13,25 @@ import './screens/auth_screen.dart';
 import './screens/home_screen.dart';
 
 Future<void> main() async {
+  final settingsProvider = SettingsProvider();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp(settingsProvider));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final SettingsProvider _settingsProvider;
+
+  const MyApp(this._settingsProvider, {super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  final _settingsProvider = SettingsProvider();
+  SettingsProvider get _settingsProvider => widget._settingsProvider;
 
   @override
   void initState() {
@@ -49,14 +55,6 @@ class _MyAppState extends State<MyApp> {
     _settingsProvider.setPlatformBrightness(brightness);
   }
 
-  Future<FirebaseApp> init() async {
-    final app = await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    return app;
-  }
-
   Widget _buildHomeScreen() {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
@@ -72,66 +70,56 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: init(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          return MultiProvider(
-            providers: [
-              ChangeNotifierProvider<SettingsProvider>(
-                create: (_) {
-                  return _settingsProvider;
-                },
-              )
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SettingsProvider>(
+          create: (_) {
+            return _settingsProvider;
+          },
+        )
+      ],
+      child: Consumer<SettingsProvider>(
+        builder: (BuildContext ctx, SettingsProvider settings, Widget? child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            locale: settings.locale,
+            supportedLocales: SettingsProvider.getSupportedLocales(),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
-            child: Consumer<SettingsProvider>(
-              builder:
-                  (BuildContext ctx, SettingsProvider settings, Widget? child) {
-                return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  locale: settings.locale,
-                  supportedLocales: SettingsProvider.getSupportedLocales(),
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  theme: ThemeData(
-                    brightness: Brightness.light,
-                    primarySwatch: Colors.blue,
-                  ),
-                  darkTheme: ThemeData(
-                    scaffoldBackgroundColor: Colors.black,
-                    backgroundColor: Colors.black,
-                    primaryColor: Colors.blue,
-                    colorScheme: ColorScheme.fromSwatch().copyWith(
-                      primary: Colors.black,
-                      secondary: Colors.blue,
-                      brightness: Brightness.dark,
-                    ),
-                    appBarTheme: const AppBarTheme(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white),
-                  ),
-                  themeMode: settings.themeMode,
-                  onGenerateRoute: (routeSettings) {
-                    if (routeSettings.name == "/home") {
-                      return PageRouteBuilder(
-                        pageBuilder: (_, a1, a2) => _buildHomeScreen(),
-                      );
-                    }
-
-                    return null;
-                  },
-                  home: _buildHomeScreen(),
-                );
-              },
+            theme: ThemeData(
+              brightness: Brightness.light,
+              primarySwatch: Colors.blue,
             ),
+            darkTheme: ThemeData(
+              scaffoldBackgroundColor: Colors.black,
+              backgroundColor: Colors.black,
+              primaryColor: Colors.blue,
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+                primary: Colors.black,
+                secondary: Colors.blue,
+                brightness: Brightness.dark,
+              ),
+              appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.blue, foregroundColor: Colors.white),
+            ),
+            themeMode: settings.themeMode,
+            onGenerateRoute: (routeSettings) {
+              if (routeSettings.name == "/home") {
+                return PageRouteBuilder(
+                  pageBuilder: (_, a1, a2) => _buildHomeScreen(),
+                );
+              }
+
+              return null;
+            },
+            home: _buildHomeScreen(),
           );
-        });
+        },
+      ),
+    );
   }
 }

@@ -45,7 +45,6 @@ class SettingsProvider with ChangeNotifier {
     _platformBrightness = brightness;
 
     if (isBrightnessBasedOnPhone) {
-      print('notifyListeners');
       notifyListeners();
     }
   }

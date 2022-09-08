@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_for_twelve/screens/languages_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -112,6 +113,35 @@ class SettingsScreenState extends State<SettingsScreen> {
                                                 .setLocale(l))));
                               },
                             ),
+                          ],
+                        ),
+                        SettingsSection(
+                          title: Text(text.translate('appearance')),
+                          tiles: [
+                            SettingsTile.switchTile(
+                              title: Text(text.translate('automatic')),
+                              leading: const Icon(FontAwesomeIcons.adjust),
+                              initialValue:
+                                  settingsProvider.isBrightnessBasedOnPhone,
+                              onToggle: (bool value) async {
+                                await settingsProvider
+                                    .setIsBrightnessBasedOnPhone(value);
+                                setState(() {});
+                              },
+                            ),
+                            if (!settingsProvider.isBrightnessBasedOnPhone)
+                              SettingsTile.switchTile(
+                                  title: Text(text.translate('dark')),
+                                  leading: const Icon(FontAwesomeIcons.moon),
+                                  initialValue: settingsProvider.useDarkMode,
+                                  onToggle:
+                                      settingsProvider.isBrightnessBasedOnPhone
+                                          ? null
+                                          : (bool value) async {
+                                              await settingsProvider
+                                                  .setUseDarkMode(value);
+                                              setState(() {});
+                                            }),
                           ],
                         ),
                       ],
