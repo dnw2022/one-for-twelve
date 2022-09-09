@@ -7,19 +7,29 @@
     {
       "name": "one_for_twelve",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "args": ["--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev"]
     },
     {
       "name": "one_for_twelve (profile mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "args": ["--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev"]
     },
     {
       "name": "one_for_twelve (release mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "args": ["--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev"]
+    },
+    {
+      "name": "one_for_twelve (deploy release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "args": ["--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=prd"]
     }
   ]
 }

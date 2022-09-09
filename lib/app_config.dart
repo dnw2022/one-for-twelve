@@ -13,10 +13,12 @@ class AppConfig {
   static AppConfig get instance => _instance!;
 
   static Future<void> init() async {
-    const env = String.fromEnvironment('env', defaultValue: 'dev');
+    const env = String.fromEnvironment('FIREBASE_HOSTING_ENVIRONMEMT',
+        defaultValue: 'dev');
 
+    const jsonSettingsKey = 'assets/config/$env.json';
     final contents = await rootBundle.loadString(
-      'assets/config/$env.json',
+      jsonSettingsKey,
     );
 
     final json = jsonDecode(contents);

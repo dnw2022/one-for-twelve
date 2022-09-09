@@ -1,4 +1,4 @@
 {
   "cloudFunctionsRegion": "europe-west3",
-  "useEmulator": true
+  "useEmulator": false
 }
