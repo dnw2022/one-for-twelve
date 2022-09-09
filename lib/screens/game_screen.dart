@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../app_localizations.dart';
+import '../services/ads.dart';
 
 import '../models/game.dart';
 
@@ -23,8 +24,21 @@ class GameScreen extends StatefulWidget {
 }
 
 class GameScreenState extends State<GameScreen> {
+  bool _adPlaying = false;
+
   Future<void> questionAnswered(Game game, String answer) async {
-    _continueWithNextQuestion(game, answer);
+    if (game.currentQuestion.number == 6) {
+      setState(() {
+        _adPlaying = true;
+      });
+
+      Ads.showRewardedInterstitialVideoAd(() {
+        _adPlaying = false;
+        _continueWithNextQuestion(game, answer);
+      });
+    } else {
+      _continueWithNextQuestion(game, answer);
+    }
   }
 
   void _continueWithNextQuestion(Game game, String answer) {
@@ -104,10 +118,14 @@ class GameScreenState extends State<GameScreen> {
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.all(20.0),
-                      child: CurrentQuestion(
-                        game.currentQuestion.question,
-                        key: ValueKey(game.currentQuestion.number.toString()),
-                      ),
+                      child: _adPlaying
+                          ? Container()
+                          : CurrentQuestion(
+                              game.currentQuestion.question,
+                              key: ValueKey(
+                                game.currentQuestion.number.toString(),
+                              ),
+                            ),
                     ),
                   ),
                   Padding(

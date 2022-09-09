@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import '../app_config.dart';
+import '../services/ads.dart';
 
 import './firebase_options.dart';
 import './app_localizations.dart';
@@ -16,6 +17,7 @@ import './screens/home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Ads.initialize();
   await AppConfig.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
