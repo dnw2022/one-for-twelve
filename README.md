@@ -112,3 +112,19 @@ If you use firebase, about 500k of c++ have to be compiled. To speed up the buil
 
 https://firebase.google.com/docs/firestore/quickstart
 https://github.com/firebase/flutterfire/issues/9015
+
+# Add splash screens and icon sets
+
+For generating icons and splash screens for multiple platforms and api versions these 2 flutter / dart packages are used:
+Splash screens: https://github.com/jonbhanson/flutter_native_splash
+Icons: https://pub.dev/packages/flutter_launcher_icons
+
+To generate the splash screens:
+
+flutter pub add flutter_native_splash
+flutter pub run flutter_native_splash:create
+
+And to generate the icon sets:
+
+flutter pub add flutter_launcher_icons
+flutter pub run flutter_launcher_icons:main
