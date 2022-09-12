@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:one_for_twelve/services/languages.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../models/question_selection_strategies.dart';
 import '../app_localizations.dart';
 
 class QuestionSelectionStrategiesScreen extends StatefulWidget {
+  final String _languageCode;
   final QuestionSelectionStrategies _currentStrategy;
   final Function(QuestionSelectionStrategies strategy) _onStrategyChosen;
 
   const QuestionSelectionStrategiesScreen(
-      this._currentStrategy, this._onStrategyChosen,
+      this._languageCode, this._currentStrategy, this._onStrategyChosen,
       {super.key});
 
   @override
@@ -31,7 +33,9 @@ class QuestionSelectionStrategiesScreenState
       body: SettingsList(
         sections: [
           SettingsSection(
-              tiles: QuestionSelectionStrategies.values.map((strategy) {
+              tiles: Languages.getAvailableQuestionSelectionStrategies(
+                      widget._languageCode)
+                  .map((strategy) {
             return SettingsTile(
               title: Text(text.translate('game_level_${strategy.index}')),
               trailing: trailingWidget(

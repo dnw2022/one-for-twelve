@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import '../models/game.dart';
 import '../models/game_user.dart';
 import '../models/question_selection_strategies.dart';
-import '../models/game_type.dart';
 
 import '../app_localizations.dart';
-import '../settings_provider.dart';
 
+import '../services/languages.dart';
 import '../services/auth.dart';
 import '../services/game_factory.dart';
-
-import '../extensions/enum_extensions.dart';
 
 import './game_screen.dart';
 
@@ -29,7 +25,6 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
   String? _languageCode;
   QuestionSelectionStrategies? _questionSelectionStrategy;
   bool _showGameSelectionScreen = false;
-  GameType _gameType = GameType.Demo;
 
   @override
   void initState() {
@@ -54,14 +49,7 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
   }
 
   Future<Game> _createGame() async {
-    if (_languageCode == 'en') {
-      return GameFactory.createDemoEn();
-    }
-
-    return _gameType == GameType.Demo
-        ? GameFactory.createDemoNl()
-        : GameFactory.createRandom(
-            _questionSelectionStrategy!, _languageCode!, false);
+    return GameFactory.create(_languageCode!, _questionSelectionStrategy!);
   }
 
   Future<void> _newGame(BuildContext context) async {
@@ -78,14 +66,6 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
         },
       ),
     );
-  }
-
-  List<GameType> _getGameTypes() {
-    if (_languageCode == 'nl') {
-      return [GameType.Demo, GameType.Random];
-    } else {
-      return [GameType.Demo];
-    }
   }
 
   @override
@@ -130,12 +110,12 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
                           children: [
                             DropdownButton(
                                 value: _languageCode,
-                                items: SettingsProvider.getSupportedLocales()
-                                    .map((locale) {
+                                items: Languages.getSupportedLanguageCodes()
+                                    .map((languageCode) {
                                   return DropdownMenuItem(
-                                      value: locale.languageCode,
+                                      value: languageCode,
                                       child: Text(text.translate(
-                                          'language_${locale.languageCode}')));
+                                          'language_$languageCode')));
                                 }).toList(),
                                 onChanged: (value) {
                                   setState(() {
@@ -146,49 +126,29 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
                         ),
                       ),
                       ListTile(
-                        leading: Text(text.translate('game_type')),
+                        leading: Text(text.translate('game_level')),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             DropdownButton(
-                                value: _gameType,
-                                items: _getGameTypes().map((gameType) {
+                                value: _questionSelectionStrategy,
+                                items: Languages
+                                        .getAvailableQuestionSelectionStrategies(
+                                            _languageCode!)
+                                    .map((strategy) {
                                   return DropdownMenuItem(
-                                      value: gameType,
+                                      value: strategy,
                                       child: Text(text.translate(
-                                          'game_type_${gameType.asString().toLowerCase()}')));
+                                          'game_level_${strategy.index}')));
                                 }).toList(),
                                 onChanged: (value) {
                                   setState(() {
-                                    _gameType = value!;
+                                    _questionSelectionStrategy = value;
                                   });
                                 })
                           ],
                         ),
                       ),
-                      if (_gameType == GameType.Random)
-                        ListTile(
-                          leading: Text(text.translate('game_level')),
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              DropdownButton(
-                                  value: _questionSelectionStrategy,
-                                  items: QuestionSelectionStrategies.values
-                                      .map((strategy) {
-                                    return DropdownMenuItem(
-                                        value: strategy,
-                                        child: Text(text.translate(
-                                            'game_level_${strategy.index}')));
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _questionSelectionStrategy = value;
-                                    });
-                                  })
-                            ],
-                          ),
-                        ),
                       ListTile(
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.end,

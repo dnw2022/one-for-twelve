@@ -1,1 +1,0 @@
-enum GameType { Demo, Random }

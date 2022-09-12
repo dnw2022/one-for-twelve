@@ -110,9 +110,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                                     builder: (BuildContext context) =>
                                         LanguagesScreen(
                                       user.gameSettings.languageCode,
-                                      (locale) async {
-                                        await user.gameSettings.setLanguageCode(
-                                            locale.languageCode);
+                                      (languageCode) async {
+                                        await user.gameSettings
+                                            .setLanguageCode(languageCode);
                                         setState(() {});
                                       },
                                     ),
@@ -129,10 +129,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         QuestionSelectionStrategiesScreen(
+                                            user.gameSettings.languageCode,
                                             user.gameSettings
                                                 .questionSelectionStrategy,
-                                            (strategy) {
-                                          user.gameSettings
+                                            (strategy) async {
+                                          await user.gameSettings
                                               .setQuestionSelectionStrategy(
                                                   strategy);
                                           setState(() {});
@@ -174,16 +175,16 @@ class SettingsScreenState extends State<SettingsScreen> {
                             SettingsTile(
                               title: Text(text.translate('language')),
                               value: Text(text.translate(
-                                  'language_${settingsProvider.locale.languageCode}')),
+                                  'language_${settingsProvider.LanguageCode}')),
                               leading: const Icon(Icons.language),
                               onPressed: (_) {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         LanguagesScreen(
-                                            settingsProvider
-                                                .locale.languageCode,
-                                            (l) => settingsProvider
-                                                .setLocale(l))));
+                                            settingsProvider.LanguageCode,
+                                            (languageCode) => settingsProvider
+                                                .setLanguageCode(
+                                                    languageCode))));
                               },
                             ),
                           ],

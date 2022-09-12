@@ -29,7 +29,8 @@ class HomeScreen extends StatelessWidget {
 
   void _startGame(BuildContext context, GameUser user) async {
     try {
-      final game = await GameFactory.createDemoNl();
+      final game = await GameFactory.create(user.gameSettings.languageCode,
+          user.gameSettings.questionSelectionStrategy);
 
       Navigator.pushReplacement(
         context,

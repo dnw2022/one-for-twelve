@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import '../app_config.dart';
 import '../services/ads.dart';
+import 'package:one_for_twelve/services/languages.dart';
 
 import './firebase_options.dart';
 import './app_localizations.dart';
@@ -35,7 +36,8 @@ Future<void> main() async {
   };
 
   window.onLocaleChanged = () {
-    settingsProvider.setLocale(window.locale, saveInPrefs: false);
+    settingsProvider.setLanguageCode(window.locale.languageCode,
+        saveInPrefs: false);
   };
 
   runApp(MyApp(settingsProvider));
@@ -85,8 +87,9 @@ class _MyAppState extends State<MyApp> {
         builder: (BuildContext ctx, SettingsProvider settings, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            locale: settings.locale,
-            supportedLocales: SettingsProvider.getSupportedLocales(),
+            locale: Locale(settings.LanguageCode),
+            supportedLocales: Languages.getSupportedLanguageCodes()
+                .map((languageCode) => Locale(languageCode)),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

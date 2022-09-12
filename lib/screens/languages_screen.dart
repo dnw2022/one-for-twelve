@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:one_for_twelve/settings_provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../app_localizations.dart';
+import '../services/languages.dart';
 
 class LanguagesScreen extends StatefulWidget {
   final String _currentLanguageCode;
-  final Function(Locale locale) _onLanguageChosen;
+  final Function(String languageCode) _onLanguageChosen;
 
   const LanguagesScreen(this._currentLanguageCode, this._onLanguageChosen,
       {super.key});
@@ -19,8 +19,6 @@ class LanguagesScreenState extends State<LanguagesScreen> {
   @override
   Widget build(BuildContext context) {
     final text = AppLocalizations.of(context);
-    final supportedlocales = SettingsProvider.getSupportedLocales();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(text.translate('languages')),
@@ -29,13 +27,13 @@ class LanguagesScreenState extends State<LanguagesScreen> {
       body: SettingsList(
         sections: [
           SettingsSection(
-              tiles: supportedlocales.map((l) {
+              tiles: Languages.getSupportedLanguageCodes().map((languageCode) {
             return SettingsTile(
-              title: Text(text.translate('language_${l.languageCode}')),
+              title: Text(text.translate('language_$languageCode')),
               trailing:
-                  trailingWidget(widget._currentLanguageCode == l.languageCode),
+                  trailingWidget(widget._currentLanguageCode == languageCode),
               onPressed: (_) {
-                widget._onLanguageChosen(l);
+                widget._onLanguageChosen(languageCode);
                 Navigator.of(context).pop();
               },
             );

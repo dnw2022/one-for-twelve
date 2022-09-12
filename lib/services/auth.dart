@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/game_user.dart';
-import '../models/user_game_settings.dart';
+import 'user_game_settings.dart';
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;

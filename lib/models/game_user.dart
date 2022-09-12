@@ -1,4 +1,4 @@
-import '../models/user_game_settings.dart';
+import '../services/user_game_settings.dart';
 
 class GameUser {
   final String displayName;
