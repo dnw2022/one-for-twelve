@@ -1,6 +1,6 @@
 # Intro
 
-Flutter version of the popular Dutch TV game show 'Twee voor 12'. You will get 12 questions. The first letters of the answers will form a word, but the letters are not yet in the right order. After answering the questions, you are allowed to ask where in the word a letter belongs. The goal is to guess the word with asking the minimum of letters.
+Flutter version of the popular Dutch TV game show 'Twee voor 12'. You will get 12 questions. The first letters of the answers will form a word, but the letters are not yet in the right order. After answering the questions, you are allowed to ask where in the word a letter belongs. The goal is to guess the word as fast as possible (with asking the minimum number of letters).
 
 ![](assets/1_for_12_animated.gif)
 
@@ -166,3 +166,15 @@ And to generate the icon sets:
 flutter pub add flutter_launcher_icons
 flutter pub run flutter_launcher_icons:main
 ```
+
+## Creating an animated gif to demo the game
+
+As you probably noticed this README links to an animated gif in the repo that shows some screenshots of the game. I tried many things to create such an animated gif, but in the end created it like this:
+
+1. Recorded some screenshots while playing the game by pressing the power & volume up buttons on my iphone at the same time.
+2. Downloaded a png picture of an iphone frame (with a transparent background).
+3. Created a custom shape in keynote that can be used as a mask for the screenshots to prevent them from covering the frame. The shape follows the display contours of the iphone frame. I saved this custom shape to my "shapes library".
+4. Created several keynote slides containing the iphone frame image, the custom shape and the different images I wanted to show. I "masked" the images with the custom shape by selecting them together and choosing Format -> Image -> Mask with selection.
+5. In keynote I exported the slides as an "animated gif".
+
+The keynote presentation file (1_for_12_animated.key) is included in the /assets folder, so you can take a look how it was done.
