@@ -8,13 +8,17 @@ Flutter version of the popular Dutch TV game show 'Twee voor 12'. You will get 1
 
 Because of the flutter packages used, the app currently only works on ios and android. Although flutter does support macos and web, the game will not work there.
 
-# Languages
+# Authentication
 
-The UI supports both English and Dutch. The initial language is based on device settings, but can be changed in the app settings. Games can also be played in either English or Dutch. When choosing English as the game language only a single 'demo' game is available though. When playing the Dutch version a question bank containing thousands of questions and hundreds of words is available. The settings screen allows you to customize the games a little, such as choosing the game difficulty.
+The project uses firebase authentication. At the moment only Google is supported as an authentication provider. Firebase supports many other providers as well, but cross platform support is not always available. This example also shows how you can use a firebase realtime database to store and retrieve additional user claims. You can for example add a 'subscription' claim to a user account when they have bought the app and not show ads.
+
+# Language support
+
+The UI supports both English and Dutch. The initial language is based on device settings, but this can be changed in the app settings. Games can also be played in either English or Dutch. When choosing English as the game language only a single 'demo' game is available though. When playing the Dutch version a question bank containing thousands of questions and hundreds of words is available. The settings screen allows you to customize the games a little, such as choosing the game difficulty.
 
 # Dark mode
 
-The settings allow you to choose dark mode if you want to. You can also let your device settings determine if dark mode is enabled or not.
+The app settings allow you to choose dark mode if you want to. You can also let your device settings determine if dark mode is enabled or not.
 
 # Ads
 
@@ -22,13 +26,13 @@ When using the ios / android simulator after question 6 a test ad will be played
 
 # Developing
 
-The following sections give a but more detail on how the game was created and what is required to run it locally and remotely.
+The following sections show some more technical details on how the app was created and what is required to run it locally and remotely.
 
-# Firebase functions
+## Firebase functions
 
 Firebase functions are used to create (random) games. See the /functions folder for more details on how to use the firebase emulator suite locally.
 
-# Initial creation
+## Initial creation
 
 Create app:
 
@@ -36,7 +40,7 @@ Create app:
 flutter create one_for_twelve
 ```
 
-# Using Firebase
+## Using Firebase
 
 In any directory run:
 
@@ -63,7 +67,7 @@ Update the `platform :osx, '10.11'` line in your macOS/Podfile to version `platf
 
 After doing this it worked on macOS as well.
 
-# Add Email/Password authentication:
+## Add Email/Password authentication:
 
 In the firebase console for the project enable Authentication and add Email/Password and Google authentication. Add a single User with email test@test.com and password password.
 
@@ -79,7 +83,7 @@ Test all configurations. On my laptop all except macOS worked. To get macOS to w
 
 https://github.com/firebase/firebase-ios-sdk/issues/8939
 
-# Add Google authentication:
+## Add Google authentication:
 
 https://firebase.google.com/docs/auth/flutter/federated-auth
 
@@ -127,17 +131,13 @@ https://github.com/flutter/flutter/issues/46157
 https://pub.dev/packages/flutterfire_ui/example
 ```
 
-# Next steps
-
-Added Splash Screen
-
-# Troubleshooting
+## Troubleshooting
 
 When enabling a firebase feature you must run 'flutterfire configure' again.
 
 When using the firebase emulators for lambda functions the projectId must be specified in the .firebaserc file in the project root. The projectId becomes part of the url.
 
-# Speeding up the xcode build for ios & macOS
+## Speeding up the xcode build for ios & macOS
 
 If you use firebase, about 500k of c++ have to be compiled. To speed up the build you can use the precompiled code from git. See:
 
@@ -146,7 +146,7 @@ https://firebase.google.com/docs/firestore/quickstart
 https://github.com/firebase/flutterfire/issues/9015
 ```
 
-# Add splash screens and icon sets
+## Add splash screens and icon sets
 
 For generating icons and splash screens for multiple platforms and api versions these 2 flutter / dart packages are used:
 
