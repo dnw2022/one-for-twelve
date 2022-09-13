@@ -1,8 +1,34 @@
-## Intro
+# Intro
 
-Flutter version of the popular Dutch TV game show 'Twee voor 12'
+Flutter version of the popular Dutch TV game show 'Twee voor 12'. You will get 12 questions. The first letters of the answers will form a word, but the letters are not yet in the right order. After answering the questions, you are allowed to ask where in the word a letter belongs. The goal is to guess the word with asking the minimum of letters.
 
-## Initial creation
+![](assets/1_for_12_animated.gif)
+
+# Platform compatibility
+
+Because of the flutter packages used, the app currently only works on ios and android. Although flutter does support macos and web, the game will not work there.
+
+# Languages
+
+The UI supports both English and Dutch. The initial language is based on device settings, but can be changed in the app settings. Games can also be played in either English or Dutch. When choosing English as the game language only a single 'demo' game is available though. When playing the Dutch version a question bank containing thousands of questions and hundreds of words is available. The settings screen allows you to customize the games a little, such as choosing the game difficulty.
+
+# Dark mode
+
+The settings allow you to choose dark mode if you want to. You can also let your device settings determine if dark mode is enabled or not.
+
+# Ads
+
+When using the ios / android simulator after question 6 a test ad will be played. When deploying to a real device no ad will be played at the moment.
+
+# Developing
+
+The following sections give a but more detail on how the game was created and what is required to run it locally and remotely.
+
+# Firebase functions
+
+Firebase functions are used to create (random) games. See the /functions folder for more details on how to use the firebase emulator suite locally.
+
+# Initial creation
 
 Create app:
 
@@ -10,7 +36,7 @@ Create app:
 flutter create one_for_twelve
 ```
 
-## Using Firebase
+# Using Firebase
 
 In any directory run:
 
@@ -33,11 +59,11 @@ Now update the main.dart file so firebase is initialised when the app loads.
 
 Test in all configurations: chrome, ios, android & macOS. In my case everything except macOS worked. For macOS I got a message:
 
-Update the `platform :osx, '10.11'` line in your macOS/Podfile to version `10.12`
+Update the `platform :osx, '10.11'` line in your macOS/Podfile to version `platform :osx, '10.12'`.
 
 After doing this it worked on macOS as well.
 
-## Add Email/Password authentication:
+# Add Email/Password authentication:
 
 In the firebase console for the project enable Authentication and add Email/Password and Google authentication. Add a single User with email test@test.com and password password.
 
@@ -53,7 +79,7 @@ Test all configurations. On my laptop all except macOS worked. To get macOS to w
 
 https://github.com/firebase/firebase-ios-sdk/issues/8939
 
-## Add Google authentication:
+# Add Google authentication:
 
 https://firebase.google.com/docs/auth/flutter/federated-auth
 
@@ -70,6 +96,7 @@ Add a button to the login screen that allows logging in using Google.
 For ios you need to add some settings to the Info.plist (see https://pub.dev/packages/google_sign_in). Make sure you follow the instructions carefully.
 I also had build errors in ios and followed the instructions here (https://github.com/rmtmckenzie/flutter_qr_mobile_vision/issues/129) to fix it:
 
+```
 cd ios
 pod cache clean --all
 pod repo update
@@ -77,7 +104,7 @@ pod update
 cd ..
 flutter clean
 flutter build ios
-grep -r IUWebView ios/Pods
+```
 
 I also had to open the ios runner project in xcode and select the correct team under "Signing and Capabilities".
 
@@ -89,18 +116,22 @@ keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
 
 For flutter web follow these instructions:
 
+```
 https://github.com/flutter/plugins/tree/master_archive/packages/google_sign_in/google_sign_in_web#web-integration
+```
 
 For macOS it is a bit more involved and you need a different package:
 
+```
 https://github.com/flutter/flutter/issues/46157
 https://pub.dev/packages/flutterfire_ui/example
+```
 
-## Next steps
+# Next steps
 
 Added Splash Screen
 
-## Troubleshooting
+# Troubleshooting
 
 When enabling a firebase feature you must run 'flutterfire configure' again.
 
@@ -110,21 +141,28 @@ When using the firebase emulators for lambda functions the projectId must be spe
 
 If you use firebase, about 500k of c++ have to be compiled. To speed up the build you can use the precompiled code from git. See:
 
+```
 https://firebase.google.com/docs/firestore/quickstart
 https://github.com/firebase/flutterfire/issues/9015
+```
 
 # Add splash screens and icon sets
 
 For generating icons and splash screens for multiple platforms and api versions these 2 flutter / dart packages are used:
-Splash screens: https://github.com/jonbhanson/flutter_native_splash
+
+Splash screens: https://github.com/jonbhanson/flutter_native_splash  
 Icons: https://pub.dev/packages/flutter_launcher_icons
 
 To generate the splash screens:
 
+```
 flutter pub add flutter_native_splash
 flutter pub run flutter_native_splash:create
+```
 
 And to generate the icon sets:
 
+```
 flutter pub add flutter_launcher_icons
 flutter pub run flutter_launcher_icons:main
+```
