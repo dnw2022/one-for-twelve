@@ -2,7 +2,7 @@
 
 Flutter version of the popular Dutch TV game show 'Twee voor 12'. You will get 12 questions. The first letters of the answers will form a word, but the letters are not yet in the right order. After answering the questions, you are allowed to ask where in the word a letter belongs. The goal is to guess the word as fast as possible (with asking the minimum number of letters).
 
-![](assets/1_for_12_animated.gif)
+![](assets/1_for_12_animated.gif) ![](assets/1_for_12_dutch_animated.gif)
 
 # Platform compatibility
 
