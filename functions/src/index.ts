@@ -154,12 +154,13 @@ const call = async (
 };
 
 const initCache = async (useUnrevised: Boolean) => {
-  const wordFiles = ["./words.csv"];
-  const questionFiles = ["./questions.csv"];
+  const resourcesPath = "../resources";
+  const wordFiles = [`${resourcesPath}/words.csv`];
+  const questionFiles = [`${resourcesPath}/questions.csv`];
 
   if (useUnrevised) {
-    wordFiles.push("./words_unrevised.csv");
-    questionFiles.push("./questions_unrevised.csv");
+    wordFiles.push(`${resourcesPath}/words_unrevised.csv`);
+    questionFiles.push(`${resourcesPath}/questions_unrevised.csv`);
   }
 
   await GameCache.Init(wordFiles, questionFiles);
