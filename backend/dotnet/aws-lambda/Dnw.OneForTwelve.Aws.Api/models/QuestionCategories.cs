@@ -1,3 +1,5 @@
+namespace Dnw.OneForTwelve.Aws.Api.models;
+
 public enum QuestionCategories {
   Unknown,
   Geography,

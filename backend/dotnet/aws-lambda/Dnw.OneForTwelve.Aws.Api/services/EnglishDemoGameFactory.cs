@@ -1,4 +1,7 @@
 // ReSharper disable StringLiteralTypo
+
+using Dnw.OneForTwelve.Aws.Api.models;
+
 namespace Dnw.OneForTwelve.Aws.Api.services;
 
 public class EnglishDemoGameFactory : IDemoGameFactory {

@@ -1,3 +1,5 @@
+using Dnw.OneForTwelve.Aws.Api.Extensions;
+using Dnw.OneForTwelve.Aws.Api.models;
 using Dnw.OneForTwelve.Aws.Api.services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,9 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 // Add services to the container.
-builder.Services.AddSingleton<IDemoGameFactory, DutchDemoGameFactory>();
-builder.Services.AddSingleton<IDemoGameFactory, EnglishDemoGameFactory>();
-builder.Services.AddSingleton<IGameService, GameService>();
+
+// Cache in the init phase of the lambda because more cpu is available and it's free
+builder.Services.AddGameServices();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -33,7 +35,6 @@ app.MapGet("/", () =>
 
 app.MapGet("/games/{language}/{questionSelectionStrategy}", (Languages language, QuestionSelectionStrategies questionSelectionStrategy, IGameService gameService) => {
     var game = gameService.Start(language, questionSelectionStrategy);
-    
     return game == null ? Results.BadRequest() : Results.Ok(game);
 });
 

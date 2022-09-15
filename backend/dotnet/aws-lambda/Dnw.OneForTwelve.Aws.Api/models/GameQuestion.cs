@@ -1,7 +1,11 @@
+using JetBrains.Annotations;
+
+namespace Dnw.OneForTwelve.Aws.Api.models;
+
 public class GameQuestion : Question {
   
-  public int Number { get; private set; }
-  public int WordPosition { get; private set; }
+  public int Number { [UsedImplicitly] get; set; }
+  [UsedImplicitly] public int WordPosition { get; private set; }
   
   public GameQuestion(int number, int wordPosition, Question question)
   {
