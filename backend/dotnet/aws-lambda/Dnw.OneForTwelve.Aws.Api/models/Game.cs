@@ -1,0 +1,1 @@
+public record Game(string Word, IEnumerable<GameQuestion> Questions);

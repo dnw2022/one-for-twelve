@@ -1,0 +1,1 @@
+public record RemoteVideo(string VideoId, int StartAt, int EndAt, RemoteVideoSources Source);

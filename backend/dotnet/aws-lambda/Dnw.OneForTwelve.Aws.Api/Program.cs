@@ -1,8 +1,14 @@
+using Dnw.OneForTwelve.Aws.Api.services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 // Add services to the container.
+builder.Services.AddSingleton<IDemoGameFactory, DutchDemoGameFactory>();
+builder.Services.AddSingleton<IDemoGameFactory, EnglishDemoGameFactory>();
+builder.Services.AddSingleton<IGameService, GameService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -18,11 +24,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.Map("/", () =>
+app.MapGet("/", () =>
 {
     var architecture = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture;
     var dotnetVersion = Environment.Version.ToString();
     return $"Architecture: {architecture}, .NET Version: {dotnetVersion}";
+});
+
+app.MapGet("/games/{language}/{questionSelectionStrategy}", (Languages language, QuestionSelectionStrategies questionSelectionStrategy, IGameService gameService) => {
+    var game = gameService.Start(language, questionSelectionStrategy);
+    
+    return game == null ? Results.BadRequest() : Results.Ok(game);
 });
 
 app.Run();
