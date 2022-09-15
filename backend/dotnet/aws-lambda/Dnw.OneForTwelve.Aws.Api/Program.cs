@@ -1,5 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -16,11 +18,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.Map("/", (IHttpContextAccessor ctx) =>
+app.Map("/", () =>
 {
     var architecture = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture;
     var dotnetVersion = Environment.Version.ToString();
-    return $"Architecture: {architecture}, .NET Version: {dotnetVersion}, {ctx.HttpContext?.Request.Path}";
+    return $"Architecture: {architecture}, .NET Version: {dotnetVersion}";
 });
 
 app.Run();
