@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qy22JQoTLOHNeA7YSpil2UfJwLdAuRxEM3rXLCdlxm+UuCDHjARW6SB6b+PznKntBR0qNv5am9lK736SYCnxjA==",
+  "dgSpecHash": "lUffLMMDxWpc3fBrRk6qqrF55CF1D+dYLpYUTbjrD3UpxVNIL3nSNc1q1u9w9bRGmcu7DnHac/WY3CHx+Tsdaw==",
   "success": true,
   "projectFilePath": "/Users/jbijlsma/Develop/flutter/one_for_twelve/backend/dotnet/aws-lambda/Dnw.OneForTwelve.Aws.Api/Dnw.OneForTwelve.Aws.Api.csproj",
   "expectedPackageFiles": [
@@ -18,7 +18,7 @@
     "/Users/jbijlsma/.nuget/packages/microsoft.extensions.configuration/2.1.0/microsoft.extensions.configuration.2.1.0.nupkg.sha512",
     "/Users/jbijlsma/.nuget/packages/microsoft.extensions.configuration.abstractions/2.1.0/microsoft.extensions.configuration.abstractions.2.1.0.nupkg.sha512",
     "/Users/jbijlsma/.nuget/packages/microsoft.extensions.configuration.binder/2.1.0/microsoft.extensions.configuration.binder.2.1.0.nupkg.sha512",
-    "/Users/jbijlsma/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/2.1.0/microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
+    "/Users/jbijlsma/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "/Users/jbijlsma/.nuget/packages/microsoft.extensions.logging/2.1.0/microsoft.extensions.logging.2.1.0.nupkg.sha512",
     "/Users/jbijlsma/.nuget/packages/microsoft.extensions.logging.abstractions/2.1.0/microsoft.extensions.logging.abstractions.2.1.0.nupkg.sha512",
     "/Users/jbijlsma/.nuget/packages/microsoft.extensions.options/2.1.0/microsoft.extensions.options.2.1.0.nupkg.sha512",
