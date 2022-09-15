@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "avAV5L+D/6ZTmqF3O6CBubQWX7gBKJ7/cZ7MV5k+Km7PolCFuyvS7VfBt1eOi+UvaGfF7aDk8e8To2/d+1uNvA==",
+  "success": true,
+  "projectFilePath": "/Users/jbijlsma/Develop/flutter/one_for_twelve/backend/dotnet/aws-lambda/Dnw.OneForTwelve.Aws.Api/Dnw.OneForTwelve.Aws.Api.csproj",
+  "expectedPackageFiles": [
+    "/Users/jbijlsma/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/jbijlsma/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/jbijlsma/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/Users/jbijlsma/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/Users/jbijlsma/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/Users/jbijlsma/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
