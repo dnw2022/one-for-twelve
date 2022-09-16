@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Dnw.OneForTwelve.Core.Models;
 using Dnw.OneForTwelve.Core.Services;
+using Dnw.OneForTwelve.Core.UnitTests.Utils;
 using NSubstitute;
 using Xunit;
 
@@ -92,28 +93,5 @@ public class QuestionCacheTests
 
         // Then
         Assert.Null(actual);
-    }
-
-    private class TestQuestionBuilder
-    {
-        private QuestionCategories _category = QuestionCategories.Art;
-        private QuestionLevels _level = QuestionLevels.Easy;
-        
-        public TestQuestionBuilder WithCategory(QuestionCategories category)
-        {
-            _category = category;
-            return this;
-        }
-
-        public TestQuestionBuilder WithLevel(QuestionLevels level)
-        {
-            _level = level;
-            return this;
-        }
-        
-        public Question Build()
-        {
-            return Question.CreateText(1, _category, "text", "answer", _level);
-        }
     }
 }
