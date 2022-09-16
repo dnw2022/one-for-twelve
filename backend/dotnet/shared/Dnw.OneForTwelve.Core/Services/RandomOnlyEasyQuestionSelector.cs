@@ -2,17 +2,24 @@ using Dnw.OneForTwelve.Core.Models;
 
 namespace Dnw.OneForTwelve.Core.Services;
 
-public class RandomOnlyEasyQuestionSelector : QuestionSelector, IQuestionSelector
+public class RandomOnlyEasyQuestionSelector : IQuestionSelector
 {
+    private readonly IQuestionSelectorHelper _questionSelectorHelper;
+    
     public QuestionSelectionStrategies Strategy => QuestionSelectionStrategies.RandomOnlyEasy;
     
-    public RandomOnlyEasyQuestionSelector(IQuestionCache questionCache) : base(questionCache)
+    public List<GameQuestion> GetQuestions(string word)
     {
+        return _questionSelectorHelper.GetQuestions(word, Categories, Levels);
     }
-    
-    protected override List<QuestionCategories> GetCategories()
+
+    public RandomOnlyEasyQuestionSelector(IQuestionSelectorHelper questionSelectorHelper)
     {
-        return new List<QuestionCategories> {
+        _questionSelectorHelper = questionSelectorHelper;
+    }
+
+    internal static readonly QuestionCategories[] Categories =
+   {
             QuestionCategories.Geography,
             QuestionCategories.Geography,
             QuestionCategories.Biology,
@@ -26,10 +33,6 @@ public class RandomOnlyEasyQuestionSelector : QuestionSelector, IQuestionSelecto
             QuestionCategories.Sports,
             QuestionCategories.ScienceOrMaths
         };
-    }
-    
-    protected override List<QuestionLevels> GetLevels()
-    {
-        return Enumerable.Range(0, 12).Select(_ => QuestionLevels.Easy).ToList();
-    }
+
+    internal static readonly QuestionLevels[] Levels = Enumerable.Range(0, 12).Select(_ => QuestionLevels.Easy).ToArray();
 }

@@ -16,6 +16,8 @@ public class GameServiceExtensionsTests
     [InlineData(typeof(IQuestionSelectorFactory), typeof(QuestionSelectorFactory))]
     [InlineData(typeof(IGameQuestionShuffler), typeof(GameQuestionShuffler))]
     [InlineData(typeof(IRandomService), typeof(RandomService))]
+    [InlineData(typeof(IItemPicker), typeof(ItemPicker))]
+    [InlineData(typeof(IQuestionSelectorHelper), typeof(QuestionSelectorHelper))]
     public void AddGameServices_SingleRegistration(Type interfaceType, Type expected)
     {
         // Given

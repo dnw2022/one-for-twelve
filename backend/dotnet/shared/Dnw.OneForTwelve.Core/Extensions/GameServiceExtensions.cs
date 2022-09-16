@@ -20,12 +20,14 @@ public static class GameServiceExtensions
 
         services.AddSingleton<IDemoGameFactory, DutchDemoGameFactory>();
         services.AddSingleton<IDemoGameFactory, EnglishDemoGameFactory>();
-        services.AddSingleton<IGameService, GameService>();
-        services.AddSingleton<IDutchRandomGameFactory, DutchRandomGameFactory>();
-        services.AddSingleton<IQuestionSelectorFactory, QuestionSelectorFactory>();
-        services.AddSingleton<IQuestionSelector, RandomQuestionSelector>();
-        services.AddSingleton<IQuestionSelector, RandomOnlyEasyQuestionSelector>();
+        services.AddScoped<IGameService, GameService>();
+        services.AddScoped<IDutchRandomGameFactory, DutchRandomGameFactory>();
+        services.AddScoped<IQuestionSelectorFactory, QuestionSelectorFactory>();
+        services.AddScoped<IQuestionSelector, RandomQuestionSelector>();
+        services.AddScoped<IQuestionSelector, RandomOnlyEasyQuestionSelector>();
         services.AddSingleton<IGameQuestionShuffler, GameQuestionShuffler>();
         services.AddSingleton<IRandomService, RandomService>();
+        services.AddSingleton<IItemPicker, ItemPicker>();
+        services.AddScoped<IQuestionSelectorHelper, QuestionSelectorHelper>();
     }
 }

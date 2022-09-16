@@ -2,48 +2,49 @@ using Dnw.OneForTwelve.Core.Models;
 
 namespace Dnw.OneForTwelve.Core.Services;
 
-public class RandomQuestionSelector : QuestionSelector, IQuestionSelector
+public class RandomQuestionSelector : IQuestionSelector
 {
+    private readonly IQuestionSelectorHelper _questionSelectorHelper;
+
     public QuestionSelectionStrategies Strategy => QuestionSelectionStrategies.Random;
-
-    public RandomQuestionSelector(IQuestionCache questionCache) : base(questionCache)
+    
+    public List<GameQuestion> GetQuestions(string word)
     {
+        return _questionSelectorHelper.GetQuestions(word, Categories, Levels);
     }
 
-    protected override List<QuestionCategories> GetCategories()
+    public RandomQuestionSelector(IQuestionSelectorHelper questionSelectorHelper)
     {
-        return new List<QuestionCategories> {
-            QuestionCategories.Geography,
-            QuestionCategories.Bible,
-            QuestionCategories.Biology,
-            QuestionCategories.Cryptic,
-            QuestionCategories.Economy,
-            QuestionCategories.History,
-            QuestionCategories.Art,
-            QuestionCategories.Literature,
-            QuestionCategories.Music,
-            QuestionCategories.Politics,
-            QuestionCategories.Sports,
-            QuestionCategories.ScienceOrMaths
-        };
+        _questionSelectorHelper = questionSelectorHelper;
     }
 
-    protected override List<QuestionLevels> GetLevels()
-    {
-        return new List<QuestionLevels>
-        {
-            QuestionLevels.Easy,
-            QuestionLevels.Easy,
-            QuestionLevels.Easy,
-            QuestionLevels.Easy,
-            QuestionLevels.Normal,
-            QuestionLevels.Normal,
-            QuestionLevels.Normal,
-            QuestionLevels.Normal,
-            QuestionLevels.Hard,
-            QuestionLevels.Hard,
-            QuestionLevels.Hard,
-            QuestionLevels.Hard
-        };
-    }
+    internal static readonly QuestionCategories[] Categories = {
+        QuestionCategories.Geography,
+        QuestionCategories.Bible,
+        QuestionCategories.Biology,
+        QuestionCategories.Cryptic,
+        QuestionCategories.Economy,
+        QuestionCategories.History,
+        QuestionCategories.Art,
+        QuestionCategories.Literature,
+        QuestionCategories.Music,
+        QuestionCategories.Politics,
+        QuestionCategories.Sports,
+        QuestionCategories.ScienceOrMaths
+    };
+
+    internal static readonly QuestionLevels[] Levels = {
+        QuestionLevels.Easy,
+        QuestionLevels.Easy,
+        QuestionLevels.Easy,
+        QuestionLevels.Easy,
+        QuestionLevels.Normal,
+        QuestionLevels.Normal,
+        QuestionLevels.Normal,
+        QuestionLevels.Normal,
+        QuestionLevels.Hard,
+        QuestionLevels.Hard,
+        QuestionLevels.Hard,
+        QuestionLevels.Hard
+    };
 }
