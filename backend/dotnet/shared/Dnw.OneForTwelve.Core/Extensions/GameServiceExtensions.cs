@@ -14,7 +14,7 @@ public static class GameServiceExtensions
         wordCache.Init();
         services.AddSingleton<IWordCache>(wordCache);
 
-        var questionCache = new QuestionCache(fileService);
+        var questionCache = new QuestionCache(fileService, randomService);
         questionCache.Init();
         services.AddSingleton<IQuestionCache>(questionCache);
 
