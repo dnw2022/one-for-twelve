@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnw.OneForTwelve.Core", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnw.OneForTwelve.Aws.Api", "Dnw.OneForTwelve.Aws.Api\Dnw.OneForTwelve.Aws.Api.csproj", "{AF3602DC-5B99-4857-99F2-8A7587F83D18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnw.OneForTwelve.Aws.Api.IntegrationTests", "Dnw.OneForTwelve.Aws.Api.IntegrationTests\Dnw.OneForTwelve.Aws.Api.IntegrationTests.csproj", "{F34D13F7-F15E-4F31-95AD-203E6997824D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{AF3602DC-5B99-4857-99F2-8A7587F83D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF3602DC-5B99-4857-99F2-8A7587F83D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF3602DC-5B99-4857-99F2-8A7587F83D18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F34D13F7-F15E-4F31-95AD-203E6997824D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34D13F7-F15E-4F31-95AD-203E6997824D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34D13F7-F15E-4F31-95AD-203E6997824D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34D13F7-F15E-4F31-95AD-203E6997824D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
