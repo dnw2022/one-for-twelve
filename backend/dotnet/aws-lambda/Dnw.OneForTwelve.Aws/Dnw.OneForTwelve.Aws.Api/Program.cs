@@ -1,6 +1,6 @@
 using Dnw.OneForTwelve.Core.Extensions;
-using Dnw.OneForTwelve.Core.models;
-using Dnw.OneForTwelve.Core.services;
+using Dnw.OneForTwelve.Core.Models;
+using Dnw.OneForTwelve.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
