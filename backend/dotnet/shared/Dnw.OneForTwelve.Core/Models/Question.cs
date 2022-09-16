@@ -1,4 +1,4 @@
-namespace Dnw.OneForTwelve.Core.models;
+namespace Dnw.OneForTwelve.Core.Models;
 
 public class Question {
     public int Id { get; protected init; }

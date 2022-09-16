@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace Dnw.OneForTwelve.Core.models;
+namespace Dnw.OneForTwelve.Core.Models;
 
 public class GameQuestion : Question {
   

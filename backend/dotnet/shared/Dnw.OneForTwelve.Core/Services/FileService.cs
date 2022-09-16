@@ -2,9 +2,9 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
-using Dnw.OneForTwelve.Core.models;
+using Dnw.OneForTwelve.Core.Models;
 
-namespace Dnw.OneForTwelve.Core.services;
+namespace Dnw.OneForTwelve.Core.Services;
 
 public interface IFileService
 {

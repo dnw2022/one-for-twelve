@@ -1,4 +1,4 @@
-using Dnw.OneForTwelve.Core.services;
+using Dnw.OneForTwelve.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnw.OneForTwelve.Core.Extensions;
@@ -8,8 +8,9 @@ public static class GameServiceExtensions
     public static void AddGameServices(this IServiceCollection services)
     {
         var fileService = new FileService();
+        var randomService = new RandomService();
 
-        var wordCache = new WordCache(fileService);
+        var wordCache = new WordCache(fileService, randomService);
         wordCache.Init();
         services.AddSingleton<IWordCache>(wordCache);
 
@@ -25,5 +26,6 @@ public static class GameServiceExtensions
         services.AddSingleton<IQuestionSelector, RandomQuestionSelector>();
         services.AddSingleton<IQuestionSelector, RandomOnlyEasyQuestionSelector>();
         services.AddSingleton<IGameQuestionShuffler, GameQuestionShuffler>();
+        services.AddSingleton<IRandomService, RandomService>();
     }
 }
