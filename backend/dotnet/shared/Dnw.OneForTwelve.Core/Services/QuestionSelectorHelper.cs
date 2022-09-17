@@ -20,8 +20,8 @@ public class QuestionSelectorHelper : IQuestionSelectorHelper
 
     public List<GameQuestion> GetQuestions(string word, QuestionCategories[] categories, QuestionLevels[] levels)
     {
-        var categoryList = categories.ToList();
-        var levelList = levels.ToList();
+        var remainingCategories = categories.ToList();
+        var remainingLevels = levels.ToList();
         var selectedQuestions = new List<GameQuestion>();
         var selectedQuestionIds = new HashSet<int>();
             
@@ -29,20 +29,65 @@ public class QuestionSelectorHelper : IQuestionSelectorHelper
 
         for (var i = 0; i < letters.Length; i++)
         {
-            var category = _itemPicker.PickRandom(categoryList);
-            var level = _itemPicker.PickRandom(levelList);
-
             var firstLetterAnswer = letters[i].ToString().ToUpper();
-            var question = _questionCache.GetRandom(firstLetterAnswer, category, level, selectedQuestionIds);
 
-            if (question == null) return selectedQuestions;
+            var maxAttempts = remainingCategories.Count;
+            Question? selectedQuestion = null;
+            
+            // First try to find a question by using each of the available
+            // categories and levels only once
+            for (var attempt = 1; attempt <= maxAttempts; attempt++)
+            {
+                selectedQuestion = GetRandomQuestion(firstLetterAnswer, remainingCategories, remainingLevels, selectedQuestionIds);
+                if (selectedQuestion != null) break;
+            }
 
-            var gameQuestion = new GameQuestion(i+1, i+1, question);
+            // If all attempts so far to select a question have failed
+            // use a random category and level from the original list
+            // we will not use the ideal question category and level distribution 
+            // but its the best we can do
+            maxAttempts = 5;
+            if (selectedQuestion == null)
+            {
+                for (var attempt = 1; attempt <= maxAttempts; attempt++)
+                {
+                    selectedQuestion = GetRandomQuestion(firstLetterAnswer, categories, levels, selectedQuestionIds);
+                    if (selectedQuestion != null) break;
+                }
+            }
 
-            selectedQuestionIds.Add(question.Id);
+            if (selectedQuestion == null) return selectedQuestions;
+
+            selectedQuestionIds.Add(selectedQuestion.Id);
+                
+            remainingCategories.Remove(selectedQuestion.Category);
+            remainingLevels.Remove(selectedQuestion.Level);
+
+            var gameQuestion = new GameQuestion(i + 1, i + 1, selectedQuestion);
             selectedQuestions.Add(gameQuestion);
         }
 
         return selectedQuestions;
+    }
+
+    private Question? GetRandomQuestion(
+        string firstLetterAnswer, 
+        IList<QuestionCategories> categoryList,
+        IList<QuestionLevels> levelList,
+        HashSet<int> selectedQuestionIds)
+    {
+        var category = _itemPicker.PickRandom(categoryList);
+        var level = _itemPicker.PickRandom(levelList);
+        
+        return GetRandomQuestion(firstLetterAnswer, selectedQuestionIds, category, level);
+    }
+
+    private Question? GetRandomQuestion(
+        string firstLetterAnswer, 
+        HashSet<int> selectedQuestionIds,
+        QuestionCategories category, 
+        QuestionLevels level)
+    {
+        return _questionCache.GetRandom(firstLetterAnswer, category, level, selectedQuestionIds);
     }
 }

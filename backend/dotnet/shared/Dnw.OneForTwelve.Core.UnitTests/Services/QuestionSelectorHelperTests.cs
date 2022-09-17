@@ -9,6 +9,17 @@ using Xunit;
 
 namespace Dnw.OneForTwelve.Core.UnitTests.Services;
 
+
+/// <summary>
+/// This really represents the core complexity of the game engine, so most of the testing effort has to go here.
+///
+/// At the moment the QuestionSelector class is too complex, which makes testing hard.
+///
+/// Some ideas to improve:
+///
+/// 1) Is QuestionsPicker a better name?
+/// 2) Can we delegate the task of selecting a single question to a different class (QuestionPicker)?
+/// </summary>
 public class QuestionSelectorHelperTests
 {
     [Fact]

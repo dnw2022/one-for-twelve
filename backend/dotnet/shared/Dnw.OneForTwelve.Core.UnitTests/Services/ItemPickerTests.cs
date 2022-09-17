@@ -26,6 +26,6 @@ public class ItemPickerTests
 
         // Then
         Assert.Equal(expectedItem, actual);
-        Assert.Equal(1, actual.Length);
+        Assert.Equal(3, items.Count);
     }
 }

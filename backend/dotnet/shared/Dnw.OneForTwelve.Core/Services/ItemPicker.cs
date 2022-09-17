@@ -17,9 +17,6 @@ public class ItemPicker : IItemPicker
     public T PickRandom<T>(IList<T> items)
     {
         var randomIndex = _randomService.Next(0, items.Count);
-        var item = items[randomIndex];
-        items.RemoveAt(randomIndex);
-
-        return item;
+        return items[randomIndex];
     }
 }
