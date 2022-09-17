@@ -498,5 +498,19 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "431203fa-b983-45c8-af4e-bea00fb56ac5",
+    "colId": "f103f48d-3359-4ba9-b01e-f8f87f4b488b",
+    "containerId": "",
+    "name": "StartGame",
+    "url": "https://localhost:5001/games/Dutch/RandomOnlyEasy",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-09-17T01:28:42.272Z",
+    "modified": "2022-09-17T01:31:44.967Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
