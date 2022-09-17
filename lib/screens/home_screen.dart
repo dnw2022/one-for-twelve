@@ -6,6 +6,7 @@ import '../models/game.dart';
 
 import '../services/auth.dart';
 import '../services/game_factory.dart';
+import '../services/game_service.dart';
 
 import './settings_screen.dart';
 import './game_screen.dart';
@@ -29,7 +30,10 @@ class HomeScreen extends StatelessWidget {
 
   void _startGame(BuildContext context, GameUser user) async {
     try {
-      final game = await GameFactory.create(user.gameSettings.languageCode,
+      // final game = await GameFactory.create(user.gameSettings.languageCode,
+      //     user.gameSettings.questionSelectionStrategy);
+
+      final game = await GameService.create(user.gameSettings.languageCode,
           user.gameSettings.questionSelectionStrategy);
 
       Navigator.pushReplacement(

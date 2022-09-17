@@ -7,7 +7,7 @@ public class Question {
     public string Answer { get; protected init;} = "";
     public QuestionLevels Level { get; protected init; }
     public string? ImageUrl { get; protected init; }
-    public bool? BlurImage { get; protected init; }
+    public bool BlurImage { get; protected init; }
     public RemoteVideo? Video { get; protected init; }
 
     public string FirstLetterAnswer => Answer.ToArray().First().ToString().ToUpper();

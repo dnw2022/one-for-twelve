@@ -1,4 +1,6 @@
 {
   "cloudFunctionsRegion": "europe-west3",
-  "useEmulator": false
+  "useEmulator": false,
+  "backendBaseUrl": "10.0.2.2:5001",
+  "ignoreInvalidCertificates": false
 }

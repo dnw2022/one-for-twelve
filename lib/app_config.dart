@@ -7,6 +7,9 @@ class AppConfig {
 
   String get cloudFunctionsRegion => _json['cloudFunctionsRegion'];
   bool get useEmulator => _json['useEmulator'] ?? false;
+  String get backendBaseUrl => _json['backendBaseUrl'] ?? 'localhost:5001';
+  bool get ignoreInvalidCertificates =>
+      _json['ignoreInvalidCertificates'] ?? false;
 
   AppConfig._(this._json);
 

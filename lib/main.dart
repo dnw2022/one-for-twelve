@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,6 +17,15 @@ import './settings_provider.dart';
 import './screens/splash_screen.dart';
 import './screens/auth_screen.dart';
 import './screens/home_screen.dart';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +50,10 @@ Future<void> main() async {
     settingsProvider.setLanguageCode(window.locale.languageCode,
         saveInPrefs: false);
   };
+
+  if (AppConfig.instance.ignoreInvalidCertificates) {
+    HttpOverrides.global = MyHttpOverrides();
+  }
 
   runApp(MyApp(settingsProvider));
 }
