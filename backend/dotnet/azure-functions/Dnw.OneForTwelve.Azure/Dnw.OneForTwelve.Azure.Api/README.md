@@ -16,6 +16,7 @@ General instructions on how to get started with Azure Functions (out-of-process)
 
 https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=azure-cli%2Cisolated-process
 https://www.cazzulino.com/net6functions.html
+https://andrewlock.net/exploring-dotnet-6-part-2-comparing-webapplicationbuilder-to-the-generic-host/
 
 ## Install Azure Functions Core Tools
 
@@ -38,4 +39,11 @@ https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 
 ```
 brew update && brew install azure-cli
+```
+
+## Create Azure Function
+
+```
+func init Dnw.OneForTwelve.Azure.Api --worker-runtime dotnet-isolated --target-framework net6.0
+func new --name HttpExample --template "HTTP trigger" --authlevel "anonymous"
 ```

@@ -512,5 +512,19 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "4131efb2-bd39-4c26-bd6c-1c087a90339c",
+    "colId": "75103219-07d9-4b1c-8878-c7d10a3899f1",
+    "containerId": "",
+    "name": "GetGame",
+    "url": "http://localhost:7071/api/games/Dutch/Random",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-09-18T02:06:50.809Z",
+    "modified": "2022-09-18T03:45:40.160Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

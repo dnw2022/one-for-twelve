@@ -29,5 +29,12 @@
     "created": "2022-09-17T01:28:19.830Z",
     "sortNum": 30000,
     "folders": []
+  },
+  {
+    "_id": "75103219-07d9-4b1c-8878-c7d10a3899f1",
+    "colName": "Local Azure Functions",
+    "created": "2022-09-18T01:28:42.516Z",
+    "sortNum": 40000,
+    "folders": []
   }
 ]
