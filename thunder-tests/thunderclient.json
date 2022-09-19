@@ -1,516 +1,20 @@
 [
   {
-    "_id": "f969a5af-7de5-4bdb-9332-6844976e0bfe",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "Vimeo get video config",
-    "url": "https://player.vimeo.com/video/{video_id}/config",
-    "method": "GET",
-    "sortNum": 60000,
-    "created": "2022-04-25T18:57:02.406Z",
-    "modified": "2022-09-08T12:05:31.476Z",
-    "headers": [],
-    "params": [
-      {
-        "name": "video_id",
-        "value": "156668480",
-        "isPath": true
-      }
-    ],
-    "tests": []
-  },
-  {
-    "_id": "7b42dd2b-ac78-4c88-a6e1-2c4886d6b377",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getDemoGameNl1",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameNl1",
-    "method": "POST",
-    "sortNum": 20000,
-    "created": "2022-09-01T12:22:37.528Z",
-    "modified": "2022-09-07T04:26:50.271Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "41495bcb-ee31-4074-b5a7-253c5f4673de",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "sayHello",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}sayHello",
-    "method": "POST",
-    "sortNum": 10000,
-    "created": "2022-09-01T13:05:31.488Z",
-    "modified": "2022-09-07T04:25:44.274Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {}\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "5fdd20fd-6e88-4172-8a24-6131117b6951",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getStats",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getStats",
-    "method": "POST",
-    "sortNum": 15000,
-    "created": "2022-09-01T13:33:36.705Z",
-    "modified": "2022-09-07T04:25:58.625Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {}\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "d7af7185-9c6a-4883-8c23-ba224341dcd1",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getRandomQuestion",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getRandomQuestion",
-    "method": "POST",
-    "sortNum": 17500,
-    "created": "2022-09-01T13:35:34.065Z",
-    "modified": "2022-09-07T04:26:10.512Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"firstLetterAnswer\": \"C\",\n    \"level\": 1,\n    \"category\": 3\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "94970a28-2754-4c4e-b569-1efa23550464",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getPossibleQuestions",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getPossibleQuestions",
-    "method": "POST",
-    "sortNum": 18750,
-    "created": "2022-09-01T13:38:03.695Z",
-    "modified": "2022-09-07T04:26:20.863Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"firstLetterAnswer\": \"B\",\n    \"level\": 0,\n    \"category\": 4\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "b4d0841d-405e-4807-a4b4-1961c53218ef",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getRandomGame",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getRandomGame",
-    "method": "POST",
-    "sortNum": 19375,
-    "created": "2022-09-01T13:39:42.504Z",
-    "modified": "2022-09-07T04:26:34.473Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"questionSelectionStrategy\": \"RandomOnlyEasy\",\n    \"languageCode\": \"en\"\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "13fc7482-cac4-42cf-aec0-1ad99cedf389",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getRandomGameWithUnrevisedQuestions",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getRandomGameWithUnrevisedQuestions",
-    "method": "POST",
-    "sortNum": 19687.5,
-    "created": "2022-09-01T13:42:06.478Z",
-    "modified": "2022-09-07T04:26:44.265Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"questionSelectionStrategy\": \"RandomOnlyEasy\",\n    \"languageCode\": \"nl\"\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "e43d283f-3810-460e-8f12-d65f5a9d9203",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getDemoGameEn1",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameEn1",
-    "method": "POST",
-    "sortNum": 30000,
-    "created": "2022-09-01T13:45:59.537Z",
-    "modified": "2022-09-07T04:26:57.271Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "f7ec804f-1ca2-4044-9361-eae96ceb8742",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getDemoGameEnYenni1",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameEnYenni1",
-    "method": "POST",
-    "sortNum": 40000,
-    "created": "2022-09-01T13:46:55.373Z",
-    "modified": "2022-09-07T04:27:04.812Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "5250009c-0868-4941-a535-2207bf859468",
-    "colId": "7db09a27-e8c7-404f-9638-3e25eb20adc7",
-    "containerId": "",
-    "name": "getDemoGameEnYenni2",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameEnYenni2",
-    "method": "POST",
-    "sortNum": 50000,
-    "created": "2022-09-01T13:46:58.827Z",
-    "modified": "2022-09-07T04:27:11.920Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "e2691e42-91a4-4e0a-a35b-0f5d0e63f388",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "sayHello",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}sayHello",
-    "method": "POST",
-    "sortNum": 10000,
-    "created": "2022-09-09T05:56:44.789Z",
-    "modified": "2022-09-09T05:56:44.789Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {}\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "99377955-2c86-4dc2-9e63-a47608643d6c",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getStats",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getStats",
-    "method": "POST",
-    "sortNum": 15000,
-    "created": "2022-09-09T05:56:44.790Z",
-    "modified": "2022-09-09T05:56:44.790Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {}\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "6c457019-6c30-410f-866d-17a22317d81e",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getRandomQuestion",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getRandomQuestion",
-    "method": "POST",
-    "sortNum": 17500,
-    "created": "2022-09-09T05:56:44.791Z",
-    "modified": "2022-09-09T05:56:44.791Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"firstLetterAnswer\": \"C\",\n    \"level\": 1,\n    \"category\": 3\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "1fa83aed-c01a-4647-b7d1-41869c507dd1",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getPossibleQuestions",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getPossibleQuestions",
-    "method": "POST",
-    "sortNum": 18750,
-    "created": "2022-09-09T05:56:44.792Z",
-    "modified": "2022-09-09T05:56:44.792Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"firstLetterAnswer\": \"B\",\n    \"level\": 0,\n    \"category\": 4\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "2740cece-4832-4920-a782-008e98da344a",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getRandomGame",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getRandomGame",
-    "method": "POST",
-    "sortNum": 19375,
-    "created": "2022-09-09T05:56:44.793Z",
-    "modified": "2022-09-09T05:56:44.793Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"questionSelectionStrategy\": \"RandomOnlyEasy\",\n    \"languageCode\": \"en\"\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "22b62315-2a6a-44fb-b471-bc18976b3ea1",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getRandomGameWithUnrevisedQuestions",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getRandomGameWithUnrevisedQuestions",
-    "method": "POST",
-    "sortNum": 19687.5,
-    "created": "2022-09-09T05:56:44.794Z",
-    "modified": "2022-09-09T05:56:44.794Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": {\n    \"questionSelectionStrategy\": \"RandomOnlyEasy\",\n    \"languageCode\": \"nl\"\n  }\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "1a29e163-ced6-4279-9720-67cdabfdea52",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getDemoGameNl1",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameNl1",
-    "method": "POST",
-    "sortNum": 20000,
-    "created": "2022-09-09T05:56:44.796Z",
-    "modified": "2022-09-09T05:56:44.796Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "d5c3cae8-9f32-4d18-829e-ada7ea6f74d3",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getDemoGameEn1",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameEn1",
-    "method": "POST",
-    "sortNum": 30000,
-    "created": "2022-09-09T05:56:44.797Z",
-    "modified": "2022-09-09T05:56:44.797Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "0efa86f0-e4b4-4d47-a3b6-5d84846c92dc",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getDemoGameEnYenni1",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameEnYenni1",
-    "method": "POST",
-    "sortNum": 40000,
-    "created": "2022-09-09T05:56:44.798Z",
-    "modified": "2022-09-09T05:56:44.798Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "94b869c9-1b36-4743-841d-632f2c425fac",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "getDemoGameEnYenni2",
-    "url": "{{AWS_LAMBDA_LOCAL_BASE_URL}}getDemoGameEnYenni2",
-    "method": "POST",
-    "sortNum": 50000,
-    "created": "2022-09-09T05:56:44.799Z",
-    "modified": "2022-09-09T05:56:44.799Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "application/json"
-      }
-    ],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"data\": null\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "2bd2c794-f6c1-4cda-945d-c7901f75047f",
-    "colId": "bd4af0eb-d16f-4c2c-9be5-12351bd0d74b",
-    "containerId": "",
-    "name": "Vimeo get video config",
-    "url": "https://player.vimeo.com/video/{video_id}/config",
-    "method": "GET",
-    "sortNum": 60000,
-    "created": "2022-09-09T05:56:44.800Z",
-    "modified": "2022-09-09T05:56:44.800Z",
-    "headers": [],
-    "params": [
-      {
-        "name": "video_id",
-        "value": "156668480",
-        "isPath": true
-      }
-    ],
-    "tests": []
-  },
-  {
     "_id": "431203fa-b983-45c8-af4e-bea00fb56ac5",
     "colId": "f103f48d-3359-4ba9-b01e-f8f87f4b488b",
     "containerId": "",
     "name": "StartGame",
-    "url": "https://localhost:5001/games/Dutch/RandomOnlyEasy",
+    "url": "https://localhost:5001/games/Dutch/Demo",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-17T01:28:42.272Z",
-    "modified": "2022-09-17T03:25:06.630Z",
+    "modified": "2022-09-19T07:38:47.685Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
     "tests": []
   },
   {
@@ -522,9 +26,13 @@
     "method": "GET",
     "sortNum": 20000,
     "created": "2022-09-18T02:06:50.809Z",
-    "modified": "2022-09-19T02:51:22.314Z",
+    "modified": "2022-09-19T07:39:02.206Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
     "tests": []
   },
   {
@@ -532,11 +40,47 @@
     "colId": "96956ede-c5c3-4f97-ad13-7d8a19083c21",
     "containerId": "",
     "name": "GetGame",
-    "url": "http://localhost:5001/one-for-twelve-32778/us-central1/gameApi/games/Dutch/Demo",
+    "url": "http://localhost:5001/one-for-twelve-32778/us-central1/gameApi/games/Dutch/Random",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-19T03:25:38.752Z",
-    "modified": "2022-09-19T05:39:40.476Z",
+    "modified": "2022-09-19T07:39:11.202Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
+    "tests": []
+  },
+  {
+    "_id": "50f31f91-2395-43a7-b1d7-57ceb70ec12c",
+    "colId": "67c928b6-5368-403e-946b-b4359fba1845",
+    "containerId": "",
+    "name": "GetGame",
+    "url": "http://localhost:5001/one-for-twelve-32778/us-central1/gameApi/games/Dutch/Random",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-09-19T06:51:07.680Z",
+    "modified": "2022-09-19T07:39:22.219Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
+    "tests": []
+  },
+  {
+    "_id": "af34d61c-0b25-4f62-bedc-3c97452c8448",
+    "colId": "f103f48d-3359-4ba9-b01e-f8f87f4b488b",
+    "containerId": "",
+    "name": "Home",
+    "url": "https://localhost:5001",
+    "method": "GET",
+    "sortNum": 5000,
+    "created": "2022-09-19T06:53:28.614Z",
+    "modified": "2022-09-19T07:39:45.668Z",
     "headers": [],
     "params": [],
     "auth": {

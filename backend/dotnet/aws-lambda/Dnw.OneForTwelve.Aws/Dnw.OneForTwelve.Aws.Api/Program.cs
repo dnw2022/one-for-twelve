@@ -5,9 +5,13 @@ using Microsoft.AspNetCore.Http.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddFirebaseAuth();
+
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 // Add services to the container.
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.Configure<JsonOptions>(options =>
 {
@@ -25,6 +29,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -34,16 +41,29 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () =>
+app.MapGet("/", (IHttpContextAccessor ctx) =>
 {
+    var userName = ctx.HttpContext?.User.Identity?.Name ?? "anonymous";
     var architecture = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture;
     var dotnetVersion = Environment.Version.ToString();
-    return $"Architecture: {architecture}, .NET Version: {dotnetVersion}";
-});
+    return $"Username: {userName} , Architecture: {architecture}, .NET Version: {dotnetVersion}";
+}).RequireAuthorization();
 
-app.MapGet("/games/{language}/{questionSelectionStrategy}", (Languages language, QuestionSelectionStrategies questionSelectionStrategy, IGameService gameService) => {
+app.MapGet("/games/{language}/{questionSelectionStrategy}", 
+    (
+        IHttpContextAccessor ctx,
+        ILogger<Program> logger,
+        Languages language, 
+        QuestionSelectionStrategies questionSelectionStrategy, 
+        IGameService gameService) =>
+{
+    if (ctx.HttpContext!.Request.Headers.TryGetValue("Authorization", out var authHeader))
+    {
+        logger.LogInformation(authHeader);
+    }
+    
     var game = gameService.Start(language, questionSelectionStrategy);
     return game == null ? Results.BadRequest() : Results.Ok(game);
-});
+}).RequireAuthorization();
 
 app.Run();
