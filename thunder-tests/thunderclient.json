@@ -536,9 +536,13 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-19T03:25:38.752Z",
-    "modified": "2022-09-19T04:30:00.393Z",
+    "modified": "2022-09-19T05:39:40.476Z",
     "headers": [],
     "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
     "tests": []
   }
 ]

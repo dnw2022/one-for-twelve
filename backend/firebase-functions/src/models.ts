@@ -34,8 +34,6 @@ export class Question {
     blurImage: boolean = false,
     video: RemoteVideo | null = null
   ) {
-    super();
-
     this.id = id;
     this.category = category;
     this.answer = answer;
