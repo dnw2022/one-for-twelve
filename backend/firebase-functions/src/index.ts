@@ -1,157 +1,37 @@
 import * as functions from "firebase-functions";
+import * as express from "express";
 
-import { GameFactory } from "./game_factory";
-import { DemoGameFactoryNl } from "./demo_game_factory_nl";
-import { DemoGameFactoryEn } from "./demo_game_factory_en";
 import { GameCache } from "./game_cache";
-import { QuestionSelector, QuestionCategories, QuestionLevels } from "./models";
+import { GameFactory } from "./game_factory";
+import { DemoGameFactoryEn } from "./demo_game_factory_en";
+import { QuestionSelectionStrategies } from "./models";
+import { DemoGameFactoryNl } from "./demo_game_factory_nl";
 
-const builder = functions.region("europe-west3");
+const app = express();
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-
-exports.sayHello = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    functions.logger.info(`Auth token: ${context.auth?.token.sub}`, {
-      structuredData: false,
-    });
-
-    return `Hello ${data?.name ?? "anonymous"}!`;
-  });
+app.get("/", (req, res) => {
+  res.status(200).send("Hello anonymous");
 });
 
-exports.getStats = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    await initCache(false);
+app.get("/games/:languageCode/:strategy", async (req, res) => {
+  let { languageCode, strategy } = req.params;
 
-    const stats = GameCache.getStats();
+  await initCache(false);
 
-    return stats;
-  });
-});
+  let game = null;
 
-exports.getRandomQuestion = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    const firstLetterAnswer = data?.firstLetterAnswer as String;
-    const level = data?.level as Number;
-    const category = data?.category as Number;
-
-    await initCache(false);
-
-    const question = GameFactory.getRandomQuestion(
-      new QuestionSelector(
-        firstLetterAnswer,
-        level as QuestionLevels,
-        category as QuestionCategories
-      )
-    );
-
-    return question;
-  });
-});
-
-exports.getPossibleQuestions = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    const firstLetterAnswer = data?.firstLetterAnswer as String;
-    const level = data?.level as Number;
-    const category = data?.category as Number;
-
-    await initCache(false);
-
-    const questions = GameFactory.getPossibleQuestions(
-      new QuestionSelector(
-        firstLetterAnswer,
-        level as QuestionLevels,
-        category as QuestionCategories
-      )
-    );
-
-    return questions;
-  });
-});
-
-exports.getRandomGame = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    const questionSelectionStrategy = data?.questionSelectionStrategy as String;
-    const languageCode = (data?.languageCode as String) ?? "nl";
-
-    await initCache(false);
-
-    const game =
-      languageCode === "nl"
-        ? await GameFactory.getRandom(questionSelectionStrategy)
-        : DemoGameFactoryEn.getDemo1();
-
-    return game;
-  });
-});
-
-exports.getRandomGameWithUnrevisedQuestions = builder.https.onCall(
-  async (data, context) => {
-    return call(context, async () => {
-      const questionSelectionStrategy =
-        data?.questionSelectionStrategy as String;
-      const languageCode = (data?.languageCode as String) ?? "nl";
-
-      await initCache(true);
-
-      const game =
-        languageCode === "nl"
-          ? await GameFactory.getRandom(questionSelectionStrategy)
-          : DemoGameFactoryEn.getDemo1();
-
-      return game;
-    });
-  }
-);
-
-exports.getDemoGameNl1 = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    return DemoGameFactoryNl.getDemo1();
-  });
-});
-
-exports.getDemoGameEn1 = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    return DemoGameFactoryEn.getDemo1();
-  });
-});
-
-exports.getDemoGameEn1 = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    return DemoGameFactoryEn.getDemo1();
-  });
-});
-
-exports.getDemoGameEnYenni1 = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    return DemoGameFactoryEn.getDemoYenni1();
-  });
-});
-
-exports.getDemoGameEnYenni2 = builder.https.onCall(async (data, context) => {
-  return call(context, async () => {
-    return DemoGameFactoryEn.getDemoYenni2();
-  });
-});
-
-const call = async (
-  context: functions.https.CallableContext,
-  doWork: () => Promise<any>
-): Promise<any> => {
-  functions.logger.info(
-    `Running in emulator: ${process.env.FUNCTIONS_EMULATOR}`
-  );
-
-  if (!process.env.FUNCTIONS_EMULATOR) {
-    if (context.auth === undefined) {
-      return getUnauthenticatedMessage();
-    }
+  if (languageCode === "English") {
+    game = DemoGameFactoryEn.getDemo1();
+  } else if (
+    strategy === QuestionSelectionStrategies[QuestionSelectionStrategies.Demo]
+  ) {
+    game = DemoGameFactoryNl.getDemo1();
+  } else {
+    game = await GameFactory.getRandom(strategy);
   }
 
-  return doWork();
-};
+  res.status(200).send(game);
+});
 
 const initCache = async (useUnrevised: Boolean) => {
   const resourcesPath = "../resources";
@@ -166,12 +46,4 @@ const initCache = async (useUnrevised: Boolean) => {
   await GameCache.Init(wordFiles, questionFiles);
 };
 
-const getUnauthenticatedMessage = () => {
-  return {
-    error: {
-      code: 401,
-      message: "Request had invalid credentials.",
-      status: "UNAUTHENTICATED",
-    },
-  };
-};
+exports.gameApi = functions.https.onRequest(app);
