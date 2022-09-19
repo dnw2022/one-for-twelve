@@ -11,6 +11,8 @@ var host = new HostBuilder()
     .ConfigureServices(services =>
     {
         services.AddScoped<ILogMessageWriter, LogMessageWriter>();
+        
+        services.ConfigureJsonSerializerOptions();
         services.AddGameServices();
     })
     .Build();

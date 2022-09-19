@@ -2,6 +2,13 @@
 
 Microsoft Azure Functions implementation of the game api.
 
+# Run locally
+
+```
+func start
+host start --useHttps --useDefaultCert
+```
+
 # Deployment
 
 After initial setup (see below) you can create / update the Azure Function using the cli command:
@@ -47,3 +54,13 @@ brew update && brew install azure-cli
 func init Dnw.OneForTwelve.Azure.Api --worker-runtime dotnet-isolated --target-framework net6.0
 func new --name HttpExample --template "HTTP trigger" --authlevel "anonymous"
 ```
+
+# Issues
+
+Certificates:
+
+https://stackoverflow.com/questions/62453695/how-to-enable-azure-function-https-easily-when-do-local-test
+
+Json serialization:
+
+https://github.com/Azure/azure-functions-host/issues/5469

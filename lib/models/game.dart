@@ -162,8 +162,8 @@ class Question extends ChangeNotifier {
         int.parse(from['id'].toString()),
         from['text'],
         from['answer'],
-        QuestionCategories.values[from['category']],
-        QuestionLevels.values[from['level']],
+        QuestionCategories.values.byName(from['category']),
+        QuestionLevels.values.byName(from['level']),
         imageUrl: from['imageUrl'],
         blur: from['blurImage'],
         remoteVideo: _convertRemoteVideo(from['video']));
@@ -175,7 +175,7 @@ class Question extends ChangeNotifier {
             videoData['videoId'],
             videoData['startAt'],
             videoData['endAt'],
-            RemoteVideoSource.values[videoData['source']],
+            RemoteVideoSource.values.byName(videoData['source']),
           )
         : null;
   }

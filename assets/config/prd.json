@@ -1,6 +1,8 @@
 {
   "cloudFunctionsRegion": "europe-west3",
   "useEmulator": false,
-  "backendBaseUrl": "10.0.2.2:5001",
+  "backendBaseUrl": "localhost:7071/api",
+  "__aws_backendBaseUrl": "10.0.2.2:5001",
+  "__azure_backendBaseUrl__": "localhost:7071/api",
   "ignoreInvalidCertificates": false
 }

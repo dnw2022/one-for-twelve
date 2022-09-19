@@ -11,9 +11,9 @@ class GameService {
     String languageCode,
     QuestionSelectionStrategies strategy,
   ) async {
-    final url = 'games/${_getApiLanguage(languageCode)}/${strategy.asString()}';
-    final resp =
-        await http.get(Uri.https(AppConfig.instance.backendBaseUrl, url));
+    final url =
+        '${AppConfig.instance.backendBaseUrl}/games/${_getApiLanguage(languageCode)}/${strategy.asString()}';
+    final resp = await http.get(Uri.parse(url));
     final result = json.decode(resp.body);
 
     return Game.fromMap(result);

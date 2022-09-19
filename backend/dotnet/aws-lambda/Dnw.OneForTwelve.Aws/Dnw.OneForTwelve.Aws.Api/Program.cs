@@ -1,12 +1,20 @@
 using Dnw.OneForTwelve.Core.Extensions;
 using Dnw.OneForTwelve.Core.Models;
 using Dnw.OneForTwelve.Core.Services;
+using Microsoft.AspNetCore.Http.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 // Add services to the container.
+
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.ConfigureDefaults();
+});
+
+// builder.Services.ConfigureJsonSerializerOptions();
 
 // Cache in the init phase of the lambda because more cpu is available and it's free
 builder.Services.AddGameServices();
