@@ -1,8 +1,9 @@
 {
   "cloudFunctionsRegion": "europe-west3",
   "useEmulator": false,
-  "backendBaseUrl": "localhost:7071/api",
-  "__aws_backendBaseUrl": "10.0.2.2:5001",
-  "__azure_backendBaseUrl__": "localhost:7071/api",
+  "backendBaseUrl": "http://10.0.2.2:7071",
+  "__aws_backendBaseUrl": "https://10.0.2.2:5001",
+  "__azure_backendBaseUrl__": "http://10.0.2.2:7071",
+  "__google_backendBaseUrl__": "http://10.0.2.2:5001/one-for-twelve-32778/us-central1/gameApi",
   "ignoreInvalidCertificates": false
 }

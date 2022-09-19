@@ -532,11 +532,11 @@
     "colId": "96956ede-c5c3-4f97-ad13-7d8a19083c21",
     "containerId": "",
     "name": "GetGame",
-    "url": "http://172.16.7.160:5001/one-for-twelve-32778/us-central1/gameApi/games/Dutch/Demo",
+    "url": "http://localhost:5001/one-for-twelve-32778/us-central1/gameApi/games/Dutch/Demo",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-19T03:25:38.752Z",
-    "modified": "2022-09-19T03:26:08.950Z",
+    "modified": "2022-09-19T03:28:11.418Z",
     "headers": [],
     "params": [],
     "tests": []

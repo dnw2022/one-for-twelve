@@ -120,7 +120,7 @@ export class GameQuestion extends Question {
     let dest = {} as any;
 
     for (let key of Object.keys(src)) {
-      if (src[key]) {
+      if (src[key] !== null) {
         dest[key] = src[key];
       }
     }
