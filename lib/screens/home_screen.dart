@@ -5,7 +5,6 @@ import '../models/game_user.dart';
 import '../models/game.dart';
 
 import '../services/auth.dart';
-import '../services/game_factory.dart';
 import '../services/game_service.dart';
 
 import './settings_screen.dart';

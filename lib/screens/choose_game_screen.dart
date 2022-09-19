@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_for_twelve/services/game_service.dart';
 import 'package:provider/provider.dart';
 
 import '../models/game.dart';
@@ -9,7 +10,6 @@ import '../app_localizations.dart';
 
 import '../services/languages.dart';
 import '../services/auth.dart';
-import '../services/game_factory.dart';
 
 import './game_screen.dart';
 
@@ -49,7 +49,7 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
   }
 
   Future<Game> _createGame() async {
-    return GameFactory.create(_languageCode!, _questionSelectionStrategy!);
+    return GameService.create(_languageCode!, _questionSelectionStrategy!);
   }
 
   Future<void> _newGame(BuildContext context) async {
