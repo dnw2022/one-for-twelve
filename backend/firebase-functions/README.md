@@ -9,6 +9,10 @@ npm start should do the same, but have to check further (maybe this will help: h
 
 # Sending http requests to local functions
 
-Thunder collection is part of the project. You just have to install the Thunder Client vscode extension and the collection should appear under the collections tab.
+The thunder collection is part of the project. You just need to install the Thunder Client vscode extension and the collection should appear under the collections tab.
 
 Standard location of saved collections / requests is: ~/Library/Application\ Support/Code/User/globalStorage/rangav.vscode-thunder-client/ (see: https://github.com/rangav/thunder-client-support/issues/547). But in this case the collection is in the git repo. To show it you have to update the Thunder Client extension settings and mark the checkbox under Thunder Client - Save to Workspace.
+
+# Using express instead of firebase https functions
+
+https://blog.logrocket.com/rest-api-firebase-cloud-functions-typescript-firestore/
