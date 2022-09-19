@@ -1,3 +1,5 @@
+import { ObjectPreJsonSerializer } from "./object_pre_json_serializer";
+
 export class Game {
   public word: String;
   public numberOfQuestions: Number;
@@ -32,6 +34,8 @@ export class Question {
     blurImage: boolean = false,
     video: RemoteVideo | null = null
   ) {
+    super();
+
     this.id = id;
     this.category = category;
     this.answer = answer;
@@ -116,19 +120,10 @@ export class GameQuestion extends Question {
   }
 
   toJSON() {
-    let src = this as any;
-    let dest = {} as any;
-
-    for (let key of Object.keys(src)) {
-      if (src[key] !== null) {
-        dest[key] = src[key];
-      }
-    }
-
-    dest.category = QuestionCategories[this.category].toString();
-    dest.level = QuestionLevels[this.level].toString();
-
-    return dest;
+    return ObjectPreJsonSerializer.copy(this, (src, dst) => {
+      dst.category = QuestionCategories[src.category].toString();
+      dst.level = QuestionLevels[src.level].toString();
+    });
   }
 }
 
@@ -148,6 +143,12 @@ export class RemoteVideo {
     this.startAt = startAt;
     this.endAt = endAt;
     this.source = source;
+  }
+
+  toJSON() {
+    return ObjectPreJsonSerializer.copy(this, (src, dst) => {
+      dst.source = RemoteVideoSources[src.source].toString();
+    });
   }
 }
 
