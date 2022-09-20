@@ -1,3 +1,4 @@
+using Dnw.OneForTwelve.Core.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -11,13 +12,13 @@ public static class AuthExtensions
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.Authority = "https://securetoken.google.com/one-for-twelve-32778";
+                options.Authority = JwtBearerConfig.Authority;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidIssuer = "https://securetoken.google.com/one-for-twelve-32778",
+                    ValidIssuer = JwtBearerConfig.Authority,
                     ValidateAudience = true,
-                    ValidAudience = "one-for-twelve-32778",
+                    ValidAudience = JwtBearerConfig.Audience,
                     ValidateLifetime = true
                 };
             });
