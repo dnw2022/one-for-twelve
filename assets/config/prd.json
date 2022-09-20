@@ -4,6 +4,6 @@
   "backendBaseUrl": "https://dnw-onefortwelve-azure-api.azurewebsites.net",
   "__aws_backendBaseUrl": "https://8tvctbmdz9.execute-api.ap-southeast-1.amazonaws.com",
   "__azure_backendBaseUrl__": "https://dnw-onefortwelve-azure-api.azurewebsites.net",
-  "__google_backendBaseUrl__": "http://10.0.2.2:5001/one-for-twelve-32778/us-central1/gameApi",
+  "__google_backendBaseUrl__": "https://us-central1-one-for-twelve-32778.cloudfunctions.net/gameApi",
   "ignoreInvalidCertificates": false
 }
