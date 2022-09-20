@@ -16,7 +16,7 @@ public class FileServiceTests
         var actual = fileService.GetWords().ToList();
 
         // Then
-        Assert.Equal(448, actual.Count);
+        Assert.Equal(412, actual.Count);
     }
     
     [Fact]

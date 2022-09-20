@@ -22,7 +22,10 @@ public class FileService : IFileService
         reader.ReadLine();
         while (reader.ReadLine() is { } line)
         {
-            words.Add(line);
+            if (!line.Contains("IJ", StringComparison.OrdinalIgnoreCase))
+            {
+                words.Add(line);
+            }
         }
 
         return words;
