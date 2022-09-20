@@ -55,6 +55,14 @@ func init Dnw.OneForTwelve.Azure.Api --worker-runtime dotnet-isolated --target-f
 func new --name HttpExample --template "HTTP trigger" --authlevel "anonymous"
 ```
 
+# Authenticaton
+
+Its a bit of a mess at the moment. Compare that to the aws lambda code, which is very straightforward because you can use all the normal minimal api features.
+
+The best thing I have found so far is how to do it yourself:
+
+https://joonasw.net/view/azure-ad-jwt-authentication-in-net-isolated-process-azure-functions
+
 # Issues
 
 Certificates:

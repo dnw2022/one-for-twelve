@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Dnw.OneForTwelve.Azure_Api;
+namespace Dnw.OneForTwelve.Azure_Api.Middleware;
 
 public interface ILogMessageWriter
 {

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Dnw.OneForTwelve.Core.Models;
 using Dnw.OneForTwelve.Core.Services;
 using JetBrains.Annotations;
@@ -16,7 +17,9 @@ internal record GameApi(ILogger<GameApi> Logger, IGameService GameService)
         string language, 
         string strategy)
     {
-        Logger.LogInformation("Language: {language}, Strategy: {strategy}", language, strategy);
+        var claimsPrincipal = req.FunctionContext.Features.Get<ClaimsPrincipal?>(); 
+        var userName = claimsPrincipal?.Identity?.Name ?? "anonymous";
+        Logger.LogInformation("UserName: {userName}, Language: {language}, Strategy: {strategy}", userName, language, strategy);
         var game = GameService.Start(Enum.Parse<Languages>(language), Enum.Parse<QuestionSelectionStrategies>(strategy));
 
         return game;

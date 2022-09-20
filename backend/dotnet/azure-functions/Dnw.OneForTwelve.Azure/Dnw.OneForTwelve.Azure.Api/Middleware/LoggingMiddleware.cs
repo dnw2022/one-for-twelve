@@ -3,7 +3,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Middleware;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dnw.OneForTwelve.Azure_Api;
+namespace Dnw.OneForTwelve.Azure_Api.Middleware;
 
 [UsedImplicitly]
 public class LoggingMiddleware : IFunctionsWorkerMiddleware
