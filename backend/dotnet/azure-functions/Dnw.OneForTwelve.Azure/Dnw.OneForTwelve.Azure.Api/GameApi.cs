@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Dnw.OneForTwelve.Azure.Api;
 
-internal record GameApi(ILogger<GameApi> Logger, IGameService GameService)
+public record GameApi(ILogger<GameApi> Logger, IGameService GameService)
 {
     [UsedImplicitly]
-    [Function(nameof(Games))]
-    public Game? Games(
+    [Function(nameof(StartGame))]
+    public Game? StartGame(
         [HttpTrigger(AuthorizationLevel.Anonymous, "GET", Route = "games/{language:alpha}/{strategy:alpha}")] HttpRequestData req,
         string language, 
         string strategy)
