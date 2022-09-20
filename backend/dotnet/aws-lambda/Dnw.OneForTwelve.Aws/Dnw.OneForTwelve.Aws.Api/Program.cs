@@ -3,9 +3,14 @@ using Dnw.OneForTwelve.Core.Models;
 using Dnw.OneForTwelve.Core.Services;
 using Microsoft.AspNetCore.Http.Json;
 
+var integrationTesting = !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("INTEGRATION_TESTING"));
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddFirebaseAuth();
+if (!integrationTesting)
+{
+    builder.Services.AddFirebaseAuth();
+}
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
@@ -18,6 +23,7 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.ConfigureDefaults();
 });
 
+// This does not work. Configuring JsonOptions like above does.
 // builder.Services.ConfigureJsonSerializerOptions();
 
 // Cache in the init phase of the lambda because more cpu is available and it's free
@@ -29,8 +35,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseAuthentication();
-app.UseAuthorization();
+if (!integrationTesting)
+{
+    app.UseAuthentication();
+    app.UseAuthorization();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -41,15 +50,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", (IHttpContextAccessor ctx) =>
+var homeRouteBuilder = app.MapGet("/", (IHttpContextAccessor ctx) =>
 {
     var userName = ctx.HttpContext?.User.Identity?.Name ?? "anonymous";
     var architecture = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture;
     var dotnetVersion = Environment.Version.ToString();
     return $"Username: {userName} , Architecture: {architecture}, .NET Version: {dotnetVersion}";
-}).RequireAuthorization();
+});
 
-app.MapGet("/games/{language}/{questionSelectionStrategy}", 
+var startGameRouteBuilder = app.MapGet("/games/{language}/{questionSelectionStrategy}", 
     (
         IHttpContextAccessor ctx,
         ILogger<Program> logger,
@@ -64,6 +73,15 @@ app.MapGet("/games/{language}/{questionSelectionStrategy}",
     
     var game = gameService.Start(language, questionSelectionStrategy);
     return game == null ? Results.BadRequest() : Results.Ok(game);
-}).RequireAuthorization();
+});
+
+if (!integrationTesting)
+{
+    var routeHandlerBuilders = new[] {homeRouteBuilder, startGameRouteBuilder};
+    foreach (var routeHandlerBuilder in routeHandlerBuilders)
+    {
+        routeHandlerBuilder.RequireAuthorization();
+    }
+}
 
 app.Run();

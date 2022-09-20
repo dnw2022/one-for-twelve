@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Dnw.OneForTwelve.Aws.Api.IntegrationTests.Models;
@@ -8,6 +9,13 @@ namespace Dnw.OneForTwelve.Aws.Api.IntegrationTests;
 
 public class IntegrationTests
 {
+    public IntegrationTests()
+    {
+        // Setting this indicates to the api startup code that authentication should be disabled
+        // The alternative is to inherit from WebApplicationFactory<Program>. Maybe its then possible to 'unregister' the middleware
+        Environment.SetEnvironmentVariable("INTEGRATION_TESTING", "Y");
+    }
+    
     [Fact]
     public async Task GetGame()
     {
