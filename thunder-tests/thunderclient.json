@@ -88,5 +88,59 @@
       "bearer": "x.y.z"
     },
     "tests": []
+  },
+  {
+    "_id": "772aa5be-1ba0-4c1a-8f94-a54fcd94f2ce",
+    "colId": "24d81a22-6625-407c-a5b0-8877d704d296",
+    "containerId": "",
+    "name": "GetGame",
+    "url": "https://dnw-onefortwelve-azure-api.azurewebsites.net/games/Dutch/Random",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-09-20T06:01:58.944Z",
+    "modified": "2022-09-20T07:33:20.589Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
+    "tests": []
+  },
+  {
+    "_id": "bd771882-7933-4ff4-999a-9440c6e26cc2",
+    "colId": "244a49c7-bac7-44b8-a3f4-af3dcb790326",
+    "containerId": "",
+    "name": "Home",
+    "url": "https://8tvctbmdz9.execute-api.ap-southeast-1.amazonaws.com",
+    "method": "GET",
+    "sortNum": 5000,
+    "created": "2022-09-20T07:30:54.934Z",
+    "modified": "2022-09-20T07:33:09.648Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
+    "tests": []
+  },
+  {
+    "_id": "2076c2c9-1bad-4e7b-81b3-f59835ad1bdf",
+    "colId": "244a49c7-bac7-44b8-a3f4-af3dcb790326",
+    "containerId": "",
+    "name": "StartGame",
+    "url": "https://8tvctbmdz9.execute-api.ap-southeast-1.amazonaws.com/games/Dutch/Random",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-09-20T07:30:54.935Z",
+    "modified": "2022-09-20T07:32:59.130Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
+    "tests": []
   }
 ]
