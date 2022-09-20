@@ -2,20 +2,48 @@
 
 Microsoft Azure Functions implementation of the game api.
 
+For running / debugging functions locally in Rider and to be able to publish them to azure using a .NET Publish profile you first need to install the "Azure Toolkit for Rider" plugin.  
+
 # Run locally
+
+Using the azure CLI or Rider are both possible.
+
+## CLI
+
+In a terminal window type the following:
 
 ```
 func start
-host start --useHttps --useDefaultCert
+(or) host start --useHttps --useDefaultCert (does not work on the apple silicon mac at the moment)
 ```
 
 # Deployment
 
-After initial setup (see below) you can create / update the Azure Function using the cli command:
+Deployment to Azure can be done with either the CLI or with a Rider publish profile.
+
+## Rider
+
+Create a new run profile under .NET -> Azure Functions Host.  
+
+## CLI
+
+After initial setup (see below) you can create / update the Azure Function using the commands (example on mac):
 
 ```
-dotnet lambda deploy-serverless --stack-name Dnw-OneForTwelve-Aws-Api --s3-bucket dnw-templates-2022
+rm -rf ./publish
+dotnet publish -c Release -o ./publish
+zip -r ./publish/publish.zip ./publish
+az functionapp deployment source config-zip -g rg-dnw -n Dnw-OneForTwelve-Azure-Api --src ./publish/publish.zip
 ```
+
+More info here:
+
+https://learn.microsoft.com/en-us/azure/azure-functions/deployment-zip-push  
+https://markheath.net/post/deploying-azure-functions-with-azure-cli  
+
+## Rider
+
+Create a new .NET Publish profile under .NET Publish -> Azure Publish Function App. 
 
 # Initial setup
 
