@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/games/:languageCode/:strategy", async (req, res) => {
-  let { languageCode, strategy } = req.params;
+  const { languageCode, strategy } = req.params;
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   console.log(token);
@@ -29,7 +29,7 @@ app.get("/games/:languageCode/:strategy", async (req, res) => {
   }
 
   try {
-    const decodedToken = await admin.auth().verifyIdToken(token!);
+    const decodedToken = await admin.auth().verifyIdToken(token);
 
     console.log(decodedToken);
 
@@ -56,7 +56,7 @@ app.get("/games/:languageCode/:strategy", async (req, res) => {
 });
 
 const initCache = async (useUnrevised: Boolean) => {
-  const resourcesPath = "../resources";
+  const resourcesPath = "./lib";
   const wordFiles = [`${resourcesPath}/words.csv`];
   const questionFiles = [`${resourcesPath}/questions.csv`];
 

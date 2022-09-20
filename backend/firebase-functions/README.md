@@ -16,3 +16,7 @@ Standard location of saved collections / requests is: ~/Library/Application\ Sup
 # Using express instead of firebase https functions
 
 https://blog.logrocket.com/rest-api-firebase-cloud-functions-typescript-firestore/
+
+# Speeding up tsc and copy ./resources
+
+https://stackoverflow.com/questions/38276862/is-there-a-way-to-use-npm-scripts-to-run-tsc-watch-nodemon-watch

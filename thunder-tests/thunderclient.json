@@ -44,7 +44,7 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-19T03:25:38.752Z",
-    "modified": "2022-09-19T07:39:11.202Z",
+    "modified": "2022-09-20T10:50:17.433Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -58,11 +58,11 @@
     "colId": "67c928b6-5368-403e-946b-b4359fba1845",
     "containerId": "",
     "name": "GetGame",
-    "url": "http://localhost:5001/one-for-twelve-32778/us-central1/gameApi/games/Dutch/Random",
+    "url": "https://us-central1-one-for-twelve-32778.cloudfunctions.net/gameApi/games/Dutch/Random",
     "method": "GET",
     "sortNum": 10000,
     "created": "2022-09-19T06:51:07.680Z",
-    "modified": "2022-09-19T07:39:22.219Z",
+    "modified": "2022-09-20T10:50:07.961Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -135,6 +135,24 @@
     "sortNum": 10000,
     "created": "2022-09-20T07:30:54.935Z",
     "modified": "2022-09-20T07:32:59.130Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "x.y.z"
+    },
+    "tests": []
+  },
+  {
+    "_id": "d5d0d84c-ec34-43b5-bcbd-9c0705083bde",
+    "colId": "67c928b6-5368-403e-946b-b4359fba1845",
+    "containerId": "",
+    "name": "Home",
+    "url": "https://us-central1-one-for-twelve-32778.cloudfunctions.net/gameApi",
+    "method": "GET",
+    "sortNum": 5000,
+    "created": "2022-09-20T07:46:42.275Z",
+    "modified": "2022-09-20T10:49:48.800Z",
     "headers": [],
     "params": [],
     "auth": {
