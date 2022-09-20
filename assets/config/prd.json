@@ -1,9 +1,9 @@
 {
   "cloudFunctionsRegion": "europe-west3",
   "useEmulator": false,
-  "backendBaseUrl": "http://10.0.2.2:7071",
+  "backendBaseUrl": "https://dnw-onefortwelve-azure-api.azurewebsites.net",
   "__aws_backendBaseUrl": "https://10.0.2.2:5001",
-  "__azure_backendBaseUrl__": "http://10.0.2.2:7071",
+  "__azure_backendBaseUrl__": "https://dnw-onefortwelve-azure-api.azurewebsites.net",
   "__google_backendBaseUrl__": "http://10.0.2.2:5001/one-for-twelve-32778/us-central1/gameApi",
   "ignoreInvalidCertificates": false
 }
