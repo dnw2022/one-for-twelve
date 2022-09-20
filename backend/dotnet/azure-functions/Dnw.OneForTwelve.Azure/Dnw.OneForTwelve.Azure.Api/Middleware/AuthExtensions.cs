@@ -1,7 +1,7 @@
 using Dnw.OneForTwelve.Core.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dnw.OneForTwelve.Azure_Api.Middleware;
+namespace Dnw.OneForTwelve.Azure.Api.Middleware;
 
 public static class AuthExtensions
 {

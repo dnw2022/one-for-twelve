@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace Dnw.OneForTwelve.Azure_Api.Middleware;
+namespace Dnw.OneForTwelve.Azure.Api.Middleware;
 
 public interface IDefaultHttpContextFactory
 {

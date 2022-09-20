@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
-namespace Dnw.OneForTwelve.Azure_Api.Middleware
+namespace Dnw.OneForTwelve.Azure.Api.Middleware
 {
     public class AuthenticationMiddleware : IFunctionsWorkerMiddleware
     {

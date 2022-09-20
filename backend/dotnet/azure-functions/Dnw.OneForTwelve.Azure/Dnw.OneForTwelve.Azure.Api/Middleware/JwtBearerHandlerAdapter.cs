@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 
-namespace Dnw.OneForTwelve.Azure_Api.Middleware;
+namespace Dnw.OneForTwelve.Azure.Api.Middleware;
 
 public interface IJwtBearerHandlerAdapter
 {

@@ -1,4 +1,4 @@
-using Dnw.OneForTwelve.Azure_Api.Middleware;
+using Dnw.OneForTwelve.Azure.Api.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Xunit;
 

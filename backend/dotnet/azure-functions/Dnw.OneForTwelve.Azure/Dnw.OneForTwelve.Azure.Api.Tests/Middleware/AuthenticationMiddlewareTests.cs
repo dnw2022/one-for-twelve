@@ -1,7 +1,7 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Dnw.OneForTwelve.Azure_Api.Middleware;
+using Dnw.OneForTwelve.Azure.Api.Middleware;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +11,7 @@ using Microsoft.Azure.Functions.Worker.Middleware;
 using NSubstitute;
 using Xunit;
 
-using AuthenticationMiddleware = Dnw.OneForTwelve.Azure_Api.Middleware.AuthenticationMiddleware;
+using AuthenticationMiddleware = Dnw.OneForTwelve.Azure.Api.Middleware.AuthenticationMiddleware;
 
 namespace Dnw.OneForTwelve.Azure.Api.Tests.Middleware;
 

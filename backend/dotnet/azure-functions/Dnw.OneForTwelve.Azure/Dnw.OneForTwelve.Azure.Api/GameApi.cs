@@ -6,7 +6,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Dnw.OneForTwelve.Azure_Api;
+namespace Dnw.OneForTwelve.Azure.Api;
 
 internal record GameApi(ILogger<GameApi> Logger, IGameService GameService)
 {

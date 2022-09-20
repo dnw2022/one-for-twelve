@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dnw.OneForTwelve.Azure.Api\Dnw_OneForTwelve_Azure_Api.csproj" />
+      <ProjectReference Include="..\Dnw.OneForTwelve.Azure.Api\Dnw.OneForTwelve.Azure.Api.csproj" />
     </ItemGroup>
 
 </Project>

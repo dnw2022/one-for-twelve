@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Xunit;
-using DefaultHttpContextFactory = Dnw.OneForTwelve.Azure_Api.Middleware.DefaultHttpContextFactory;
+using DefaultHttpContextFactory = Dnw.OneForTwelve.Azure.Api.Middleware.DefaultHttpContextFactory;
 
 namespace Dnw.OneForTwelve.Azure.Api.Tests.Middleware;
 

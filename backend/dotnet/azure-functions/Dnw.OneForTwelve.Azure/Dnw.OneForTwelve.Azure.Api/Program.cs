@@ -1,4 +1,4 @@
-using Dnw.OneForTwelve.Azure_Api.Middleware;
+using Dnw.OneForTwelve.Azure.Api.Middleware;
 using Dnw.OneForTwelve.Core.Extensions;
 using Microsoft.Extensions.Hosting;
 
