@@ -77,6 +77,10 @@ Without this you will see errors like this in the CloudWatch logs: 'Cannot get s
 
 More info on this issue can be found here: https://github.com/normj/LambdaNETCoreSamples/tree/master/ArmLambdaFunction
 
+# Serilog logging
+
+For Serilog logging the Serilog.AspNetCore was added to the API project. Note that logging using Log.ForContext<> requires setting Log.Logger. Also note that Log.ForContext<Program> in combination with setting the minimum log level for a certain namespace does not work in combination with top-level statements. If you check typeof(Program).Namespace when using top-level statements you will see it is null. That is the reason why in the API project an explicit Program class with a Main method is used.   
+
 # Issues
 
 The alternative way to deploy a lambda function without aws cloud formation is to use 'dotnet lambda deploy-function'. I had some issues with it (especially when changing the architecture to arm64), so I stopped looking into it. But to deploy you use:
