@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 
 class AppConfig {
@@ -7,7 +8,8 @@ class AppConfig {
 
   String get cloudFunctionsRegion => _json['cloudFunctionsRegion'];
   bool get useEmulator => _json['useEmulator'] ?? false;
-  String get backendBaseUrl => _json['backendBaseUrl'] ?? 'localhost:5001';
+  String get backendBaseUrl =>
+      _getBackendBaseUrl(_json['backendBaseUrl'] ?? 'localhost:5001');
   bool get ignoreInvalidCertificates =>
       _json['ignoreInvalidCertificates'] ?? false;
 
@@ -27,5 +29,9 @@ class AppConfig {
     final json = jsonDecode(contents);
 
     _instance = AppConfig._(json);
+  }
+
+  static String _getBackendBaseUrl(String url) {
+    return Platform.isAndroid ? url.replaceAll('localhost', '10.0.2.2') : url;
   }
 }
