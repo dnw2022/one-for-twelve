@@ -9,7 +9,7 @@
       "Type": "AWS::Serverless::Function",
       "Properties": {
         "Handler": "Dnw.OneForTwelve.Aws.Api",
-        "Architectures": [ "x86_64" ]
+        "Architectures": [ "x86_64" ],
         "Runtime": "provided.al2",
         "CodeUri": "",
         "MemorySize": 256,

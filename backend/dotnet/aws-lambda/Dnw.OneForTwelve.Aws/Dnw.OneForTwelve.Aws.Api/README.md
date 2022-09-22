@@ -44,7 +44,19 @@ aws s3api create-bucket --bucket dnw-templates-2022 --create-bucket-configuratio
 dotnet new webapi -minimal -o Dnw.OneForTwelve.Aws.Api
 ```
 
-Note that the assemblyname in the project file has to be set to bootstrap.
+# Aws Lambda configuration
+
+Add nuget package to project:
+
+```
+Amazon.Lambda.AspNetCoreServer.Hosting
+```
+
+Add aws-lambda-tools-defaults.json file with aws lambda defaults.
+
+Add serverless.template file with AWS Cloud Foundation configuration (file is referenced from the aws-lambda-tools-defaults.json). 
+
+Note that the assembly name in the project file has to be set to bootstrap.
 
 # Optional configuration
 
