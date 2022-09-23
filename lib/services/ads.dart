@@ -2,6 +2,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:io' show Platform;
 
 import './purchases.dart';
+import '../logging.dart';
 
 class Ads {
   static bool isBannerAdShown = false;
@@ -21,7 +22,7 @@ class Ads {
             InterstitialAdLoadCallback(onAdLoaded: (InterstitialAd ad) {
           _videoAdd = ad;
         }, onAdFailedToLoad: (LoadAdError error) {
-          print('InterstitialAd failed to load: $error');
+          Log.instance.w('InterstitialAd failed to load: $error');
         }),
         request: const AdRequest());
   }

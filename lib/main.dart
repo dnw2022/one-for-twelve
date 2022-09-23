@@ -1,14 +1,18 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:one_for_twelve/logging.dart';
+import 'package:one_for_twelve/models/question_selection_strategies.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import '../app_config.dart';
 import '../services/ads.dart';
-import 'package:one_for_twelve/services/languages.dart';
+import '../services/languages.dart';
+import '../services/game_service.dart';
 
 import './firebase_options.dart';
 import './app_localizations.dart';
@@ -29,11 +33,22 @@ class MyHttpOverrides extends HttpOverrides {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Ads.initialize();
+
   await AppConfig.init();
+
+  initLogging();
+
+  if (AppConfig.instance.ignoreInvalidCertificates) {
+    HttpOverrides.global = MyHttpOverrides();
+  }
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  tryWakeUpBackendWithoutBlocking();
+
+  Ads.initialize();
 
   final window = WidgetsBinding.instance.window;
 
@@ -51,11 +66,16 @@ Future<void> main() async {
         saveInPrefs: false);
   };
 
-  if (AppConfig.instance.ignoreInvalidCertificates) {
-    HttpOverrides.global = MyHttpOverrides();
-  }
-
   runApp(MyApp(settingsProvider));
+}
+
+void tryWakeUpBackendWithoutBlocking() {
+  try {
+    GameService.create(Languages.dutch, QuestionSelectionStrategies.Random,
+        ignoreIfAuthTokenIsMissing: true);
+  } catch (e) {
+    Log.instance.i(e.toString());
+  }
 }
 
 class MyApp extends StatefulWidget {

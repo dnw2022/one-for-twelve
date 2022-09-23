@@ -1,6 +1,5 @@
 {
-  "cloudFunctionsRegion": "europe-west3",
-  "useEmulator": false,
+  "minimumLogLevel": "info",
   "backendBaseUrl": "https://8tvctbmdz9.execute-api.ap-southeast-1.amazonaws.com",
   "__aws_backendBaseUrl": "https://8tvctbmdz9.execute-api.ap-southeast-1.amazonaws.com",
   "__azure_backendBaseUrl__": "https://dnw-onefortwelve-azure-api.azurewebsites.net",

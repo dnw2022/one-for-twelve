@@ -48,7 +48,7 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
         .setShowGameSelectionScreen(_showGameSelectionScreen);
   }
 
-  Future<Game> _createGame() async {
+  Future<Game?> _createGame() async {
     return GameService.create(_languageCode!, _questionSelectionStrategy!);
   }
 
@@ -60,7 +60,7 @@ class ChooseGameScreenState extends State<ChooseGameScreen> {
       MaterialPageRoute<GameScreen>(
         builder: (_) {
           return ChangeNotifierProvider<Game>.value(
-            value: game,
+            value: game!,
             child: GameScreen(),
           );
         },

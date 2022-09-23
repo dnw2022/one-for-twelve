@@ -28,19 +28,30 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _startGame(BuildContext context, GameUser user) async {
-    try {
-      // final game = await GameFactory.create(user.gameSettings.languageCode,
-      //     user.gameSettings.questionSelectionStrategy);
+    final text = AppLocalizations.of(context);
 
+    try {
       final game = await GameService.create(user.gameSettings.languageCode,
           user.gameSettings.questionSelectionStrategy);
+
+      if (game == null) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Sorry :("),
+                content: Text(text.translate("game_start_error")),
+              );
+            });
+        return;
+      }
 
       Navigator.pushReplacement(
         context,
         MaterialPageRoute<GameScreen>(
           builder: (_) {
             return ChangeNotifierProvider<Game>.value(
-              value: game,
+              value: game!,
               child: GameScreen(),
             );
           },
@@ -51,7 +62,7 @@ class HomeScreen extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text("Error"),
+              title: const Text("Sorry, we have an issue"),
               content: Text(ex.toString()),
             );
           });

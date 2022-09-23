@@ -8,21 +8,30 @@
       "name": "one_for_twelve",
       "request": "launch",
       "type": "dart",
-      "args": ["--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev"]
+      "args": [
+        "--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev",
+        "--dart-define=USE_EMULATOR"
+      ]
     },
     {
       "name": "one_for_twelve (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile",
-      "args": ["--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev"]
+      "args": [
+        "--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev",
+        "--dart-define=USE_EMULATOR"
+      ]
     },
     {
       "name": "one_for_twelve (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
-      "args": ["--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev"]
+      "args": [
+        "--dart-define=FIREBASE_HOSTING_ENVIRONMEMT=dev",
+        "--dart-define=USE_EMULATOR"
+      ]
     },
     {
       "name": "one_for_twelve (deploy release mode)",

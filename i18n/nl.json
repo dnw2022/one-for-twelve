@@ -74,5 +74,6 @@
   "game_type_random": "Random vragen",
   "game_type_demo": "Voorbeeld (vaste vragen)",
   "choose_question": "Kies een vraag ..",
-  "select_random_other": "Selecteer random andere"
+  "select_random_other": "Selecteer random andere",
+  "game_start_error": "Het spel kon niet worden gestart. Probeer het later nog eens."
 }

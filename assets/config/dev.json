@@ -1,6 +1,5 @@
 {
-  "cloudFunctionsRegion": "europe-west3",
-  "useEmulator": true,
+  "minimumLogLevel": "debug",
   "backendBaseUrl": "https://localhost:5001",
   "__aws_backendBaseUrl": "https://localhost:5001",
   "__azure_backendBaseUrl__": "http://localhost:7071",

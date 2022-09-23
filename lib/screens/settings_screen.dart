@@ -74,6 +74,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                     }
 
                     final user = snapshot.data;
+                    if (user == null) return Container();
 
                     return SettingsList(
                       sections: [

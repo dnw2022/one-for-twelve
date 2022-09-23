@@ -1,10 +1,13 @@
-import 'package:one_for_twelve/models/question_selection_strategies.dart';
+import '../models/question_selection_strategies.dart';
 
 class Languages {
+  static String dutch = 'nl';
+  static String english = 'en';
+
   static List<String> getSupportedLanguageCodes() {
     return [
-      "en",
-      "nl",
+      Languages.english,
+      Languages.dutch,
     ];
   }
 

@@ -13,7 +13,7 @@ class UserGameSettings {
       "GAME_QUESTION_SELECTION_STRATEGY";
 
   String? _languageCode;
-  String get languageCode => _languageCode ?? 'nl';
+  String get languageCode => _languageCode ?? Languages.dutch;
   Future<void> setLanguageCode(String value) async {
     _languageCode = value;
     final sharedPrefs = await SharedPreferences.getInstance();

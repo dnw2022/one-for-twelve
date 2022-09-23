@@ -74,5 +74,6 @@
   "game_type_random": "Random questions",
   "game_type_demo": "Demo (fixed questions)",
   "choose_question": "Choose a question ..",
-  "select_random_other": "Select random other"
+  "select_random_other": "Select random other",
+  "game_start_error": "A game could not be started. Please try again later."
 }

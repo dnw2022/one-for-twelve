@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'dart:io' show Platform;
+
 import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 
 class AppConfig {
   static AppConfig? _instance;
   final dynamic _json;
 
-  String get cloudFunctionsRegion => _json['cloudFunctionsRegion'];
-  bool get useEmulator => _json['useEmulator'] ?? false;
+  bool get isRunningInEmulator =>
+      const bool.hasEnvironment('USE_EMULATOR') ? true : false;
+  Level get minimumLogLevel => Level.values.byName(_json['minimumLogLevel']);
   String get backendBaseUrl =>
       _getBackendBaseUrl(_json['backendBaseUrl'] ?? 'localhost:5001');
   bool get ignoreInvalidCertificates =>

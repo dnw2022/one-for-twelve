@@ -47,7 +47,6 @@ dependencies:
   settings_ui: ^2.0.2
   provider: ^6.0.3
   font_awesome_flutter: ^9.2.0
-  cloud_functions: ^3.3.6
   video_player: ^2.4.7
   http: ^0.13.5
   youtube_explode_dart: ^1.12.0
@@ -55,6 +54,7 @@ dependencies:
   google_mobile_ads: ^2.0.1
   flutter_native_splash: ^2.2.9
   flutter_launcher_icons: ^0.10.0
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:
