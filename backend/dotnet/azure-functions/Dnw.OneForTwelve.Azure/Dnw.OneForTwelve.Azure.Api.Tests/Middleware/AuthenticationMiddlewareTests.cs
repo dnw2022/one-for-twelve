@@ -95,6 +95,28 @@ public class AuthenticationMiddlewareTests
     }
     
     [Fact]
+    public async Task Invoke_InvalidBase64Token()
+    {
+        // Given
+        _functionContext.BindingContext.BindingData["Headers"]
+            .Returns("{\"Authorization\":\"x.y.z\"}");
+
+        const string failureMessage = "aMessage";
+        var authResult = AuthenticateResult.Fail(failureMessage);
+        _jwtBearerHandlerAdapter.AuthenticateAsync().Returns(authResult);
+        
+        // When
+        var ex = await Assert.ThrowsAsync<UnauthorizedAccessException>(async () => await _middleware.Invoke(_functionContext, _next));
+
+        // Then
+        Assert.NotNull(ex);
+        Assert.Equal(failureMessage, ex.Message);
+        
+        await _jwtBearerHandlerAdapter.Received(1).InitializeAsync(_authScheme, _defaultHttpContext);
+        _functionContext.Features.DidNotReceive().Set(Arg.Any<ClaimsPrincipal>());
+    }
+    
+    [Fact]
     public async Task Invoke_AuthenticateAsyncFails()
     {
         // Given
