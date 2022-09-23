@@ -22,11 +22,11 @@
     "colId": "75103219-07d9-4b1c-8878-c7d10a3899f1",
     "containerId": "",
     "name": "GetGame",
-    "url": "http://localhost:7071/games/Dutch/Demo",
+    "url": "https://localhost:5001/games/Dutch/Demo",
     "method": "GET",
     "sortNum": 20000,
     "created": "2022-09-18T02:06:50.809Z",
-    "modified": "2022-09-20T00:19:25.095Z",
+    "modified": "2022-09-23T07:06:14.886Z",
     "headers": [],
     "params": [],
     "auth": {
