@@ -107,6 +107,13 @@ And you can then test it like this:
 dotnet lambda invoke-function aws-lambda-webapi -p "Good morning Jeroen"
 ```
 
+# Temporarily stop an aws lambda function
+
+```
+aws lambda put-function-concurrency --function-name Dnw-OneForTwelve-Aws-Api-AspNetCoreFunction-TruVB5Q52D5n --reserved-concurrent-executions 0
+aws lambda put-function-concurrency --function-name Dnw-OneForTwelve-Aws-Api-AspNetCoreFunction-TruVB5Q52D5n --reserved-concurrent-executions 1
+```
+
 # Useful reading
 
 https://aws.amazon.com/blogs/compute/introducing-the-net-6-runtime-for-aws-lambda/
