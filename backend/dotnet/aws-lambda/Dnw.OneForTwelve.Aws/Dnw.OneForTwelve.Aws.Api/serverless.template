@@ -8,6 +8,7 @@
     "AspNetCoreFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
+        "FunctionName": "Dnw-OneForTwelve-Aws-Api",
         "Handler": "Dnw.OneForTwelve.Aws.Api",
         "Architectures": [ "x86_64" ],
         "Runtime": "provided.al2",

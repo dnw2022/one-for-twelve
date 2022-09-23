@@ -13,7 +13,7 @@ dotnet lambda deploy-serverless --stack-name Dnw-OneForTwelve-Aws-Api --s3-bucke
 And to test your changes:
 
 ```
-curl https://8tvctbmdz9.execute-api.ap-southeast-1.amazonaws.com/
+curl https://iv9e0vwgrc.execute-api.ap-southeast-1.amazonaws.com
 ```
 
 ## Initial setup
@@ -98,20 +98,35 @@ For Serilog logging the Serilog.AspNetCore was added to the API project. Note th
 The alternative way to deploy a lambda function without aws cloud formation is to use 'dotnet lambda deploy-function'. I had some issues with it (especially when changing the architecture to arm64), so I stopped looking into it. But to deploy you use:
 
 ```
-dotnet lambda deploy-function aws-lambda-webapi --function-architecture arm64
+dotnet lambda deploy-function Dnw-OneForTwelve-Aws-Api --function-architecture arm64
 ```
 
 And you can then test it like this:
 
 ```
-dotnet lambda invoke-function aws-lambda-webapi -p "Good morning Jeroen"
+dotnet lambda invoke-function Dnw-OneForTwelve-Aws-Api -p "{}"
 ```
 
 # Temporarily stop an aws lambda function
 
 ```
-aws lambda put-function-concurrency --function-name Dnw-OneForTwelve-Aws-Api-AspNetCoreFunction-TruVB5Q52D5n --reserved-concurrent-executions 0
-aws lambda put-function-concurrency --function-name Dnw-OneForTwelve-Aws-Api-AspNetCoreFunction-TruVB5Q52D5n --reserved-concurrent-executions 1
+aws lambda put-function-concurrency --function-name Dnw-OneForTwelve-Aws-Api --reserved-concurrent-executions 0
+aws lambda delete-function-concurrency --function-name Dnw-OneForTwelve-Aws-Api
+```
+
+# AWS SAM CLI 
+
+When using vscode there is a nice extension called AWS Toolkit. Cmd -> Shift - P gives some commands starting with AWS that you can use.
+
+For working with AWS Serverless Application Model (SAM) you need the AWS SAM Toolkit available here:
+
+https://aws.amazon.com/serverless/sam/
+
+On the mac:
+
+```
+brew tap aws/tap
+brew install aws-sam-cli
 ```
 
 # Useful reading
