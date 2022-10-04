@@ -1,0 +1,16 @@
+{
+  "name": "@dnw-one-for-twelve/game-core",
+  "version": "1.0.0",
+  "description": "One for twelve game core package",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm -rf lib tsconfig.tsbuildinfo"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.0"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "minimumLogLevel": "debug",
-  "backendBaseUrl": "https://localhost:5001",
+  "backendBaseUrl": "http://localhost:8082",
   "__aws_backendBaseUrl": "https://localhost:5001",
   "__azure_backendBaseUrl__": "https://localhost:5001",
-  "__google_backendBaseUrl__": "http://localhost:5001/one-for-twelve-32778/us-central1/gameApi",
+  "__google_backendBaseUrl__": "http://localhost:8082",
   "ignoreInvalidCertificates": true
 }

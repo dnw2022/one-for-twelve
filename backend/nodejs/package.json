@@ -1,0 +1,16 @@
+{
+  "name": "backend-nodejs",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "pnpm --stream -r run build",
+    "start": "pnpm --stream -r run start",
+    "serve": "pnpm --stream -r run serve",
+    "publish": "pnpm --stream -r run publish",
+    "deploy": "pnpm --stream -r run deploy",
+    "clean": "pnpm -r run clean",
+    "uninstall": "rm pnpm-lock.yaml && rm -rf node_modules && pnpm -r run uninstall"
+  }
+}
