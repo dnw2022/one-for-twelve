@@ -7,9 +7,30 @@ import {
 } from "./models";
 import { GameCache } from "./game_cache";
 import { QuestionSelectionStrategyFactory } from "./question_selection";
+import { DemoGameFactoryEn } from "./demo_game_factory_en";
+import { DemoGameFactoryNl } from "./demo_game_factory_nl";
 
 export class GameFactory {
-  public static getRandom = async (strategy: String): Promise<Game> => {
+  public static getGame = async (
+    languageCode: String,
+    strategy: String
+  ): Promise<Game> => {
+    let game = null;
+
+    if (languageCode === "English") {
+      game = DemoGameFactoryEn.getDemo1();
+    } else if (
+      strategy === QuestionSelectionStrategies[QuestionSelectionStrategies.Demo]
+    ) {
+      game = DemoGameFactoryNl.getDemo1();
+    } else {
+      game = await GameFactory.getRandom(strategy);
+    }
+
+    return game;
+  };
+
+  private static getRandom = async (strategy: String): Promise<Game> => {
     const questionSelectionStrategy =
       GameFactory.getQuestionSelectionStrategy(strategy);
 
@@ -36,22 +57,20 @@ export class GameFactory {
     } while (true);
   };
 
-  public static getRandomQuestion = (selector: QuestionSelector) => {
+  private static getRandomQuestion = (selector: QuestionSelector) => {
     const questions = GameFactory.getPossibleQuestions(selector);
     const count = questions.length;
     const randomIndex = Math.floor(Math.random() * count);
     return questions[randomIndex];
   };
 
-  public static getPossibleQuestions = (
+  private static getPossibleQuestions = (
     selector: QuestionSelector
   ): Question[] => {
-    return (
-      GameCache.QuestionsByFirstLetterAnswer.get(
-        selector.firstLetterAnswer
-      )?.filter(
-        (q) => q.category === selector.category && q.level === selector.level
-      ) ?? []
+    return GameCache.getQuestionsByFirstLetterAnswer(
+      selector.firstLetterAnswer
+    )?.filter(
+      (q) => q.category === selector.category && q.level === selector.level
     );
   };
 
@@ -91,9 +110,10 @@ export class GameFactory {
   };
 
   private static getRandomWord = (): String => {
-    const count = GameCache.Words.length;
+    const words = GameCache.getWords();
+    const count = words.length;
     const randomIndex = Math.floor(Math.random() * count);
-    return GameCache.Words[randomIndex];
+    return words[randomIndex];
   };
 
   private static getRandomQuestions = (selectors: QuestionSelector[]) => {
@@ -102,7 +122,7 @@ export class GameFactory {
     });
   };
 
-  private static shuffle(array: any) {
+  private static shuffle = (array: any) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
 
@@ -113,5 +133,5 @@ export class GameFactory {
       // let t = array[i]; array[i] = array[j]; array[j] = t
       [array[i], array[j]] = [array[j], array[i]];
     }
-  }
+  };
 }

@@ -4,9 +4,6 @@ import * as admin from "firebase-admin";
 
 import { GameCache } from "./game_cache";
 import { GameFactory } from "./game_factory";
-import { DemoGameFactoryEn } from "./demo_game_factory_en";
-import { QuestionSelectionStrategies } from "./models";
-import { DemoGameFactoryNl } from "./demo_game_factory_nl";
 
 admin.initializeApp();
 
@@ -35,17 +32,7 @@ app.get("/games/:languageCode/:strategy", async (req, res) => {
 
     await initCache(false);
 
-    let game = null;
-
-    if (languageCode === "English") {
-      game = DemoGameFactoryEn.getDemo1();
-    } else if (
-      strategy === QuestionSelectionStrategies[QuestionSelectionStrategies.Demo]
-    ) {
-      game = DemoGameFactoryNl.getDemo1();
-    } else {
-      game = await GameFactory.getRandom(strategy);
-    }
+    const game = await GameFactory.getGame(languageCode, strategy);
 
     return res.status(200).send(game);
   } catch (ex) {
@@ -65,7 +52,10 @@ const initCache = async (useUnrevised: Boolean) => {
     questionFiles.push(`${resourcesPath}/questions_unrevised.csv`);
   }
 
-  await GameCache.Init(wordFiles, questionFiles);
+  await GameCache.init(wordFiles, questionFiles);
 };
+
+//tslint:disable-next-line no-floating-promises
+initCache(false);
 
 exports.gameApi = functions.https.onRequest(app);

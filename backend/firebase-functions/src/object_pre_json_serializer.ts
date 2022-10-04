@@ -1,5 +1,5 @@
 export class ObjectPreJsonSerializer {
-  static copy<TSource>(
+  public static copy<TSource>(
     from: TSource,
     customize: (from: TSource, to: any) => void
   ): any {

@@ -8,45 +8,62 @@ export class GameCache {
   private static questionsByFirstLetterAnswer: Map<String, Question[]> | null =
     null;
 
-  static get Words(): String[] {
+  public static getWords = (): String[] => {
     return GameCache.words ?? [];
-  }
-  static get QuestionsByFirstLetterAnswer(): Map<String, Question[]> {
-    return (
-      GameCache.questionsByFirstLetterAnswer ?? ({} as Map<String, Question[]>)
-    );
-  }
+  };
 
-  public static Init = async (
+  public static getQuestionsByFirstLetterAnswer = (
+    firstLetterAnswer: String
+  ): Question[] => {
+    return (
+      (
+        GameCache.questionsByFirstLetterAnswer ??
+        ({} as Map<String, Question[]>)
+      ).get(firstLetterAnswer) ?? []
+    );
+  };
+
+  public static init = async (
     wordFiles: String[],
     questionFiles: String[]
   ): Promise<void> => {
+    console.log("GameCache.init => start");
+    console.time();
+
     const promises = [];
 
     if (GameCache.words === null) {
+      console.log("Caching words");
       promises.push(GameCache.cacheWords(wordFiles));
+      console.log("Cached words");
     }
 
     if (GameCache.questionsByFirstLetterAnswer === null) {
+      console.log("Caching questions");
       promises.push(GameCache.cacheQuestions(questionFiles));
+      console.log("Cached questions");
     }
 
     await Promise.all(promises);
+
+    console.timeEnd();
+    console.log("GameCache.init => finished");
   };
 
   private static cacheWords = async (files: String[]): Promise<void> => {
     return new Promise(async (resolve, reject) => {
       const promises: Promise<String[]>[] = [];
-      files.forEach((f) => promises.push(GameCache.getWords(f)));
+      files.forEach((f) => promises.push(GameCache.fetchWords(f)));
 
-      const words = ([] as String[]).concat(...(await Promise.all(promises)));
-      GameCache.words = words;
+      GameCache.words = ([] as String[]).concat(
+        ...(await Promise.all(promises))
+      );
 
       resolve();
     });
   };
 
-  private static getWords = async (file: String): Promise<String[]> => {
+  private static fetchWords = async (file: String): Promise<String[]> => {
     return new Promise((resolve, reject) => {
       const words: String[] = [];
 
@@ -105,7 +122,10 @@ export class GameCache {
     });
   };
 
-  private static groupBy<T, K>(list: T[], getKey: (item: T) => K): Map<K, T[]> {
+  private static groupBy = <T, K>(
+    list: T[],
+    getKey: (item: T) => K
+  ): Map<K, T[]> => {
     const map = new Map<K, T[]>();
     list.forEach((item) => {
       const key = getKey(item);
@@ -118,7 +138,7 @@ export class GameCache {
     });
 
     return map;
-  }
+  };
 
   private static getCategory = (category: String): QuestionCategories => {
     switch (category) {

@@ -8,7 +8,7 @@ import {
 } from "./models";
 
 export class DemoGameFactoryNl {
-  static getDemo1 = (): Game => {
+  public static getDemo1(): Game {
     return new Game("buschauffeur", [
       new GameQuestion(
         8,
@@ -155,5 +155,5 @@ export class DemoGameFactoryNl {
         )
       ),
     ]);
-  };
+  }
 }
