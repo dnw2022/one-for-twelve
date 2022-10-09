@@ -1,32 +1,51 @@
 import { Question, QuestionCategories } from "./models";
 
-const csv = require("fast-csv");
-const fs = require("fs");
+import csv from "fast-csv";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
 export class GameCache {
-  private static words: String[] | null = null;
-  private static questionsByFirstLetterAnswer: Map<String, Question[]> | null =
+  private static words: string[] | null = null;
+  private static questionsByFirstLetterAnswer: Map<string, Question[]> | null =
     null;
 
-  public static getWords = (): String[] => {
+  public static getWords = (): string[] => {
     return GameCache.words ?? [];
   };
 
   public static getQuestionsByFirstLetterAnswer = (
-    firstLetterAnswer: String
+    firstLetterAnswer: string
   ): Question[] => {
     return (
       (
         GameCache.questionsByFirstLetterAnswer ??
-        ({} as Map<String, Question[]>)
+        ({} as Map<string, Question[]>)
       ).get(firstLetterAnswer) ?? []
     );
   };
 
   public static init = async (
-    wordFiles: String[],
-    questionFiles: String[]
+    wordFiles: string[] | undefined = undefined,
+    questionFiles: string[] | undefined = undefined,
+    useUnrevised: boolean = false
   ): Promise<void> => {
+    const resourcePath = this.getResourcePath();
+
+    if (wordFiles == undefined) {
+      wordFiles = [`${resourcePath}/words.csv`];
+      if (useUnrevised) {
+        wordFiles.push(`${resourcePath}/words_unrevised.csv`);
+      }
+    }
+
+    if (questionFiles == undefined) {
+      questionFiles = [`${resourcePath}/questions.csv`];
+      if (useUnrevised) {
+        questionFiles.push(`${resourcePath}/questions_unrevised.csv`);
+      }
+    }
+
     console.log("GameCache.init => start");
     console.time();
 
@@ -50,12 +69,16 @@ export class GameCache {
     console.log("GameCache.init => finished");
   };
 
-  private static cacheWords = async (files: String[]): Promise<void> => {
+  private static getResourcePath(): string {
+    return path.dirname(fileURLToPath(import.meta.url));
+  }
+
+  private static cacheWords = async (files: string[]): Promise<void> => {
     return new Promise(async (resolve, reject) => {
-      const promises: Promise<String[]>[] = [];
+      const promises: Promise<string[]>[] = [];
       files.forEach((f) => promises.push(GameCache.fetchWords(f)));
 
-      GameCache.words = ([] as String[]).concat(
+      GameCache.words = ([] as string[]).concat(
         ...(await Promise.all(promises))
       );
 
@@ -63,11 +86,11 @@ export class GameCache {
     });
   };
 
-  private static fetchWords = async (file: String): Promise<String[]> => {
+  private static fetchWords = async (file: string): Promise<string[]> => {
     return new Promise((resolve, reject) => {
-      const words: String[] = [];
+      const words: string[] = [];
 
-      fs.createReadStream(file)
+      fs.createReadStream(file.toString())
         .pipe(csv.parse({ delimiter: ";", headers: true, trim: true }))
         .on("data", (data: any) => {
           words.push(data.word);
@@ -78,7 +101,7 @@ export class GameCache {
     });
   };
 
-  private static cacheQuestions = async (files: String[]): Promise<void> => {
+  private static cacheQuestions = async (files: string[]): Promise<void> => {
     return new Promise(async (resolve, reject) => {
       const promises: Promise<Question[]>[] = [];
       files.forEach((f) => promises.push(GameCache.getQuestions(f)));
@@ -95,7 +118,7 @@ export class GameCache {
     });
   };
 
-  private static getQuestions = async (file: String): Promise<Question[]> => {
+  private static getQuestions = async (file: string): Promise<Question[]> => {
     return new Promise((resolve, reject) => {
       const questions: Question[] = [];
 
@@ -140,7 +163,7 @@ export class GameCache {
     return map;
   };
 
-  private static getCategory = (category: String): QuestionCategories => {
+  private static getCategory = (category: string): QuestionCategories => {
     switch (category) {
       case "AARD":
         return QuestionCategories.Geography;

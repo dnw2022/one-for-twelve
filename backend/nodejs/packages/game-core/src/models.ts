@@ -1,11 +1,11 @@
 import { ObjectPreJsonSerializer } from "./object_pre_json_serializer";
 
 export class Game {
-  public word: String;
+  public word: string;
   public numberOfQuestions: Number;
   public questions: GameQuestion[];
 
-  constructor(word: String, questions: GameQuestion[]) {
+  constructor(word: string, questions: GameQuestion[]) {
     this.word = word;
     this.numberOfQuestions = questions.length;
     this.questions = questions;
@@ -15,22 +15,22 @@ export class Game {
 export class Question {
   public id: Number;
   public category: QuestionCategories;
-  public answer: String;
-  public text: String;
+  public answer: string;
+  public text: string;
   public level: QuestionLevels;
-  public imageUrl: String | null;
+  public imageUrl: string | null;
   public blurImage: boolean;
   public video: RemoteVideo | null;
 
-  public firstLetterAnswer: String;
+  public firstLetterAnswer: string;
 
   protected constructor(
     id: Number,
     category: QuestionCategories,
-    question: String,
-    answer: String,
+    question: string,
+    answer: string,
     level: QuestionLevels,
-    imageUrl: String | null = null,
+    imageUrl: string | null = null,
     blurImage: boolean = false,
     video: RemoteVideo | null = null
   ) {
@@ -49,8 +49,8 @@ export class Question {
   static createText = (
     id: Number,
     category: QuestionCategories,
-    question: String,
-    answer: String,
+    question: string,
+    answer: string,
     level: QuestionLevels
   ): Question => {
     return new Question(id, category, question, answer, level);
@@ -59,10 +59,10 @@ export class Question {
   static createImage = (
     id: Number,
     category: QuestionCategories,
-    question: String,
-    answer: String,
+    question: string,
+    answer: string,
     level: QuestionLevels,
-    imageUrl: String,
+    imageUrl: string,
     blurImage: boolean = false
   ): Question => {
     return new Question(
@@ -79,8 +79,8 @@ export class Question {
   static createVideo = (
     id: Number,
     category: QuestionCategories,
-    question: String,
-    answer: String,
+    question: string,
+    answer: string,
     level: QuestionLevels,
     video: RemoteVideo
   ): Question => {
@@ -126,13 +126,13 @@ export class GameQuestion extends Question {
 }
 
 export class RemoteVideo {
-  public videoId: String;
+  public videoId: string;
   public startAt: Number;
   public endAt: Number;
   public source: RemoteVideoSources;
 
   constructor(
-    videoId: String,
+    videoId: string,
     startAt: Number,
     endAt: Number,
     source: RemoteVideoSources
@@ -185,11 +185,11 @@ export enum QuestionLevels {
 
 export class QuestionSelector {
   public category: QuestionCategories;
-  public firstLetterAnswer: String;
+  public firstLetterAnswer: string;
   public level: QuestionLevels;
 
   constructor(
-    firstLetterAnswer: String,
+    firstLetterAnswer: string,
     level: QuestionLevels,
     category: QuestionCategories
   ) {

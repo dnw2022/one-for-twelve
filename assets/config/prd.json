@@ -1,7 +1,8 @@
 {
   "minimumLogLevel": "info",
-  "backendBaseUrl": "https://iv9e0vwgrc.execute-api.ap-southeast-1.amazonaws.com",
-  "__aws_backendBaseUrl": "https://iv9e0vwgrc.execute-api.ap-southeast-1.amazonaws.com",
+  "backendBaseUrl": "https://35g21zkfpd.execute-api.ap-southeast-1.amazonaws.com",
+  "__aws_dotnet_backendBaseUrl": "https://iv9e0vwgrc.execute-api.ap-southeast-1.amazonaws.com",
+  "__aws_node_backendBaseUrl": "https://35g21zkfpd.execute-api.ap-southeast-1.amazonaws.com",
   "__azure_backendBaseUrl__": "https://dnw-onefortwelve-azure-api.azurewebsites.net",
   "__google_backendBaseUrl__": "https://game-api-pkpr4fgiiq-uc.a.run.app",
   "ignoreInvalidCertificates": false

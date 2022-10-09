@@ -9,7 +9,10 @@
     "start": "pnpm --stream -r run start",
     "serve": "pnpm --stream -r run serve",
     "publish": "pnpm --stream -r run publish",
-    "deploy": "pnpm --stream -r run deploy",
+    "game-core-deploy": "pnpm --filter=./packages/* --stream -r run deploy",
+    "gcloud-deploy": "pnpm --stream -r run gcloud-deploy",
+    "sam-publish": "pnpm --stream -r run sam-publish",
+    "sam-deploy": "pnpm --stream -r run sam-deploy",
     "clean": "pnpm -r run clean",
     "uninstall": "rm pnpm-lock.yaml && rm -rf node_modules && pnpm -r run uninstall"
   }

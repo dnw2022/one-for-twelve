@@ -1,6 +1,6 @@
 {
   "minimumLogLevel": "debug",
-  "backendBaseUrl": "http://localhost:8082",
+  "backendBaseUrl": "https://35g21zkfpd.execute-api.ap-southeast-1.amazonaws.com",
   "__aws_backendBaseUrl": "https://localhost:5001",
   "__azure_backendBaseUrl__": "https://localhost:5001",
   "__google_backendBaseUrl__": "http://localhost:8082",

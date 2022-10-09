@@ -13,7 +13,7 @@
     "start": "concurrently \"npm run watch\" \"webpack --watch\"",
     "serve": "npm run copy-resources && npx @google-cloud/functions-framework --target=gameApi --source ./dist/ --port=8082",
     "publish": "npm run build && npm run copy-files",
-    "deploy": "npm run publish && ./scripts/gcloud-deploy.sh game-api ./publish",
+    "gcloud-deploy": "npm run publish && ./scripts/gcloud-deploy.sh game-api ./publish",
     "clean": "rm -rf dist tsconfig.tsbuildinfo && rm -rf ./publish",
     "uninstall": "rm -rf node_modules && rm -rf publish",
     "copy-resources": "cp ../../resources/* ./dist",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "express": "^4.18.1",
-    "fast-csv": "^4.3.6",
+    "csv-parse": "5.3.0",
     "firebase-admin": "^11.0.1"
   },
   "devDependencies": {

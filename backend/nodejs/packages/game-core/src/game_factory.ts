@@ -12,8 +12,8 @@ import { DemoGameFactoryNl } from "./demo_game_factory_nl";
 
 export class GameFactory {
   public static getGame = async (
-    languageCode: String,
-    strategy: String
+    languageCode: string,
+    strategy: string
   ): Promise<Game> => {
     let game = null;
 
@@ -30,7 +30,7 @@ export class GameFactory {
     return game;
   };
 
-  private static getRandom = async (strategy: String): Promise<Game> => {
+  private static getRandom = async (strategy: string): Promise<Game> => {
     const questionSelectionStrategy =
       GameFactory.getQuestionSelectionStrategy(strategy);
 
@@ -74,7 +74,7 @@ export class GameFactory {
     );
   };
 
-  private static getQuestionSelectionStrategy = (strategy: String) => {
+  private static getQuestionSelectionStrategy = (strategy: string) => {
     if (strategy === null || strategy === undefined)
       return QuestionSelectionStrategies.Random;
 
@@ -90,7 +90,7 @@ export class GameFactory {
 
   private static getQuestionSelectors = (
     strategy: QuestionSelectionStrategies,
-    word: String
+    word: string
   ) => {
     const selectionStrategy = QuestionSelectionStrategyFactory.create(strategy);
 
@@ -109,7 +109,7 @@ export class GameFactory {
     return questionSelectors;
   };
 
-  private static getRandomWord = (): String => {
+  private static getRandomWord = (): string => {
     const words = GameCache.getWords();
     const count = words.length;
     const randomIndex = Math.floor(Math.random() * count);

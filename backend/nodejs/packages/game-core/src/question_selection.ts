@@ -28,7 +28,7 @@ abstract class QuestionSelectionStrategy {
 }
 
 class RandomQuestionSelectionStrategy extends QuestionSelectionStrategy {
-  getSelectors(word: String) {
+  getSelectors(word: string) {
     const questionSelectors = [];
 
     const categories = [
@@ -47,7 +47,6 @@ class RandomQuestionSelectionStrategy extends QuestionSelectionStrategy {
     ];
 
     const levels = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2];
-
     const letters = [...word];
 
     for (const letter of letters) {
