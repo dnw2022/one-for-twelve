@@ -25,7 +25,7 @@ export class Auth {
     // based on the 'kid' in the token header
     const decodedToken = jwt.decode(token, { complete: true });
 
-    if (decodedToken === undefined)
+    if (decodedToken === null)
       return this.createResponse("Unable to decode token");
 
     const kid = decodedToken?.header.kid;
