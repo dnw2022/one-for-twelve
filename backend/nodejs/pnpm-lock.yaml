@@ -13,9 +13,11 @@ importers:
       '@types/node': ^18.7.23
       esbuild: ^0.15.10
       esbuild-plugin-ts-references: ^0.2.0
+      firebase-admin: ^11.0.1
     dependencies:
       '@dnw-one-for-twelve/game-core': link:../packages/game-core
       '@middy/core': 3.5.0
+      firebase-admin: 11.1.0_@firebase+app-types@0.8.0
     devDependencies:
       '@types/aws-lambda': 8.10.106
       '@types/node': 18.8.3
