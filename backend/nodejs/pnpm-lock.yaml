@@ -7,17 +7,17 @@ importers:
 
   aws-sam:
     specifiers:
+      '@dnw-core/auth': ^1.0.5
       '@dnw-one-for-twelve/game-core': ^1.0.0
       '@middy/core': ^3.5.0
       '@types/aws-lambda': ^8.10.106
       '@types/node': ^18.7.23
       esbuild: ^0.15.10
       esbuild-plugin-ts-references: ^0.2.0
-      firebase-admin: ^11.0.1
     dependencies:
+      '@dnw-core/auth': link:../packages/dnw-core-auth
       '@dnw-one-for-twelve/game-core': link:../packages/game-core
       '@middy/core': 3.5.0
-      firebase-admin: 11.1.0_@firebase+app-types@0.8.0
     devDependencies:
       '@types/aws-lambda': 8.10.106
       '@types/node': 18.8.3
@@ -32,8 +32,8 @@ importers:
       '@types/express-serve-static-core': ^4.17.31
       '@types/node': ^18.8.0
       concurrently: ^7.4.0
-      csv-parse: 5.3.0
       express: ^4.18.1
+      fast-csv: ^4.3.6
       firebase-admin: ^11.0.1
       fork-ts-checker-webpack-plugin: ^7.2.13
       npm-watch: ^0.11.0
@@ -46,8 +46,8 @@ importers:
       webpack-dev-server: ^4.11.1
       webpack-node-externals: ^3.0.0
     dependencies:
-      csv-parse: 5.3.0
       express: 4.18.2
+      fast-csv: 4.3.6
       firebase-admin: 11.1.0_@firebase+app-types@0.8.0
     devDependencies:
       '@dnw-one-for-twelve/game-core': link:../packages/game-core
@@ -66,6 +66,21 @@ importers:
       webpack-cli: 4.10.0_vnmgq7jx5zjkzolvtfp7mdf5ri
       webpack-dev-server: 4.11.1_5v66e2inugklgvlh4huuavolfq
       webpack-node-externals: 3.0.0
+
+  packages/dnw-core-auth:
+    specifiers:
+      '@types/jsonwebtoken': ^8.5.9
+      '@types/node': ^18.8.0
+      esbuild: ^0.15.10
+      jsonwebtoken: ^8.5.1
+      jwks-rsa: ^2.1.4
+    dependencies:
+      jsonwebtoken: 8.5.1
+      jwks-rsa: 2.1.4
+    devDependencies:
+      '@types/jsonwebtoken': 8.5.9
+      '@types/node': 18.8.3
+      esbuild: 0.15.10
 
   packages/game-core:
     specifiers:
@@ -544,7 +559,6 @@ packages:
     resolution: {integrity: sha512-272FMnFGzAVMGtu9tkr29hRL6bZj4Zs1KZNeHLnKqAvp06tAIcarTMwOh8/8bz4FmKRcMxZhZNeUAQsNLoiPhg==}
     dependencies:
       '@types/node': 18.8.3
-    dev: false
 
   /@types/linkify-it/3.0.2:
     resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
@@ -1251,10 +1265,6 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
-
-  /csv-parse/5.3.0:
-    resolution: {integrity: sha512-UXJCGwvJ2fep39purtAn27OUYmxB1JQto+zhZ4QlJpzsirtSFbzLvip1aIgziqNdZp/TptvsKEV5BZSxe10/DQ==}
-    dev: false
 
   /date-fns/2.29.3:
     resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}

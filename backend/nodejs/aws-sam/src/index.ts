@@ -1,10 +1,9 @@
 import { Context, APIGatewayProxyResult, APIGatewayEvent } from "aws-lambda";
 import middy from "@middy/core";
-import admin from "firebase-admin";
+
+import { Auth } from "@dnw-core/auth";
 
 import { GameFactory, GameCache } from "@dnw-one-for-twelve/game-core";
-
-admin.initializeApp({ projectId: "one-for-twelve-32778" });
 
 export const lambdaHandler = async (
   event: APIGatewayEvent,
@@ -13,19 +12,16 @@ export const lambdaHandler = async (
   const { languageCode, strategy } = event.pathParameters!;
   const token = event.headers["authorization"]?.replace("Bearer ", "");
 
-  console.log(JSON.stringify(event.headers));
   console.log(token);
 
-  if (!token) {
-    return {
-      statusCode: 401,
-      body: "Bearer token missing from Authorization header",
-    };
+  const authResult = await Auth.validateJwt(
+    token,
+    "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+    "one-for-twelve-32778"
+  );
+  if (authResult !== undefined) {
+    return authResult;
   }
-
-  const decodedToken = await admin.auth().verifyIdToken(token);
-
-  console.log(decodedToken);
 
   await initCache();
 
