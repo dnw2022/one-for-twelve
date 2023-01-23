@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - github
 
 jobs:
   deploy:
@@ -11,7 +12,8 @@ jobs:
     env:
       AWS_REGION: ap-southeast-1
       AWS_STACK_NAME: Dnw-OneForTwelve-Aws-Api
-      AWS_S3_BUCKET: dnw-templates-2022
+      AWS_S3_BUCKET: dnw-2023
+      AWS_DISTRIBUTION_ID: E2LR1K2KPCV2U8
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       WORKING_DIR: backend/dotnet/aws-lambda/Dnw.OneForTwelve.Aws/Dnw.OneForTwelve.Aws.Api
@@ -38,12 +40,19 @@ jobs:
       - name: Install dotnet lambda tools
         run: dotnet tool install -g Amazon.Lambda.Tools
 
-      - name: Deploy to Lambda
+      - name: Invalidate CloudFront Cache
         run: |
-          cd ./$WORKING_DIR
-          pwd
-          dotnet lambda deploy-serverless \
-            --stack-name $AWS_STACK_NAME \
-            --s3-bucket $AWS_S3_BUCKET \
+          aws cloudfront create-invalidation \
             --region $AWS_REGION \
-            --disable-version-check true
+            --distribution-id $AWS_DISTRIBUTION_ID \
+            --paths "/*"
+
+      # - name: Deploy to Lambda
+      #   run: |
+      #     cd ./$WORKING_DIR
+      #     pwd
+      #     dotnet lambda deploy-serverless \
+      #       --stack-name $AWS_STACK_NAME \
+      #       --s3-bucket $AWS_S3_BUCKET \
+      #       --region $AWS_REGION \
+      #       --disable-version-check true
