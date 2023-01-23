@@ -63,7 +63,7 @@ public static class WebAppBuilder
 
         services.Configure<JsonOptions>(options =>
         {
-            options.SerializerOptions.ConfigureDefaults();
+            options.SerializerOptions.AddContext<HttpApiJsonSerializerContext>();
         });
 
         // This does not work. Configuring JsonOptions like above does.

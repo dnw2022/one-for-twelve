@@ -69,7 +69,7 @@ public class FileService : IFileService
     // ReSharper disable once ClassNeverInstantiated.Local
     private class QuestionCategoryConverter : DefaultTypeConverter
     {
-        public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+        public override object ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
             return text switch
             {
@@ -97,7 +97,7 @@ public class FileService : IFileService
     // ReSharper disable once ClassNeverInstantiated.Local
     private class QuestionLevelConverter : DefaultTypeConverter
     {
-        public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+        public override object ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
             return text switch
             {

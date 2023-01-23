@@ -20,11 +20,3 @@ Its best to also the rest api approach when using google cloud functions as oppo
 
 1. When using a simple (rest) api the flutter app can be configured to use a different backend api by just changing the base url. If for google cloud functions HttpsCallable is used we need some conditional logic in the flutter app.
 2. the cloud_firestore dart package uses grpc in the background. On ios about 500k lines of c++ code need to be compiled which slows down the ios builds considerably.
-
-# Initial setup
-
-In the \dotnet folder create a .net specific .gitignore file:
-
-```
-dotnet new gitignore
-```

@@ -1,5 +1,8 @@
+using System.Text.Json.Serialization;
+
 namespace Dnw.OneForTwelve.Core.Models;
 
+[JsonConverter(typeof(EnumStringJsonConverter<QuestionCategories>))]
 public enum QuestionCategories {
   Unknown,
   Geography,

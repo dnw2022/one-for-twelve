@@ -28,6 +28,6 @@ public class IntegrationTests
 
         // Then
         Assert.NotNull(game);
-        Assert.Equal(12, game!.Questions.Count);
+        Assert.Equal(12, game.Questions.Count);
     }
 }

@@ -39,7 +39,7 @@ internal class Program
                 return game == null ? Results.BadRequest() : Results.Ok(game);
             });
 
-        WebAppBuilder.RequireAuthorization(new[] {homeRouteBuilder, startGameRouteBuilder});
+        // WebAppBuilder.RequireAuthorization(new[] {homeRouteBuilder, startGameRouteBuilder});
 
         app!.Run();
 
