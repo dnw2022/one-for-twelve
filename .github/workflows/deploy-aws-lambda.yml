@@ -35,6 +35,7 @@ jobs:
         run: dotnet tool install -g Amazon.Lambda.Tools
 
       - name: Deploy to Lambda
+        working-directory: $WORKING_DIR
         run: |
           dotnet lambda deploy-serverless \
             --stack-name $AWS_STACK_NAME \
