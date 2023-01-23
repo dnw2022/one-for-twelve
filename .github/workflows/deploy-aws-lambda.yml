@@ -26,10 +26,14 @@ jobs:
           dotnet-version: 7.0.x
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: |
+          cd ./$WORKING_DIR
+          dotnet restore
 
       - name: Build
-        run: dotnet build -c Release --no-restore
+        run: |
+          cd ./$WORKING_DIR
+          dotnet build -c Release --no-restore
 
       - name: Install dotnet lambda tools
         run: dotnet tool install -g Amazon.Lambda.Tools
