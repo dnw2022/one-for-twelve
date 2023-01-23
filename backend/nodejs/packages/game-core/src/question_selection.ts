@@ -29,7 +29,7 @@ abstract class QuestionSelectionStrategy {
 
 class RandomQuestionSelectionStrategy extends QuestionSelectionStrategy {
   getSelectors(word: string) {
-    const questionSelectors = [];
+    const questionSelectors : QuestionSelector[] = [];
 
     const categories = [
       QuestionCategories.Geography,
@@ -82,7 +82,7 @@ class RandomQuestionSelectionStrategy extends QuestionSelectionStrategy {
 
 class RandomOnlyEasyQuestionSelectionStrategy extends QuestionSelectionStrategy {
   getSelectors(word: String) {
-    const questionSelectors = [];
+    const questionSelectors : QuestionSelector[] = [];
     const categories = [
       QuestionCategories.Geography,
       QuestionCategories.Geography,

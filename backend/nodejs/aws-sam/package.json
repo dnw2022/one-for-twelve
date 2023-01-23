@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dnw-one-for-twelve/game-core": "^1.0.0",
+    "@dnw-one-for-twelve/game-core": "^1.0.2",
     "@dnw-core/auth": "^1.0.6",
     "@middy/core": "^3.5.0"
   },

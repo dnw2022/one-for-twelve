@@ -15,7 +15,7 @@ export class GameFactory {
     languageCode: string,
     strategy: string
   ): Promise<Game> => {
-    let game = null;
+    let game : Game | null = null;
 
     if (languageCode === "English") {
       game = DemoGameFactoryEn.getDemo1();
@@ -94,7 +94,7 @@ export class GameFactory {
   ) => {
     const selectionStrategy = QuestionSelectionStrategyFactory.create(strategy);
 
-    let questionSelectors = [];
+    let questionSelectors : QuestionSelector[] = [];
     let attempt = 1;
 
     do {

@@ -24,7 +24,94 @@ The app settings allow you to choose dark mode if you want to. You can also let 
 
 When using the ios / android simulator after question 6 a test ad will be played. When deploying to a real device no ad will be played at the moment.
 
-# Developing
+# Running locally (first time)
+
+## Install flutter and tools on Apple Silicon
+
+```shell
+brew install --cask flutter
+brew install --cask android-studio
+
+brew install openjdk
+echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
+
+cd /Applications/Android\ Studio.app/Contents/
+ln -s ./jbr jre
+sudo gem install cocoapods
+
+flutter doctor
+```
+## Install Firebase Tools
+
+https://firebase.google.com/docs/flutter/setup?platform=ios  
+
+```shell
+npm install -g firebase-tools
+firebase login
+
+firebase init
+```
+
+Log in at the Firebase Console and create a new project. Then in the root of your project run 'fireflutter configure'. Select the project you just created and follow the instructions:
+
+```shell
+flutterfire configure
+```
+
+Important: if you reconfigure anything in the project (for example start using a new Google Service or enable / disable an Authentication Provider) you need to run 'flutterfire configure' again!
+
+In the Firebase Console this will create all the apps under the project you selected. To be able to see the apps you might have to log off and -on again though. It will also add the ./android/google-services.json and ./iOS/Runner/GoogleService-Info.plist files to your local project.
+
+Afterwards some manual work is still needed if you want to use specific Firebase Services like Google Authentication:
+
+1. For the Android App in the Firebase Project set the SHA1 certificate thumbprint. You can get the thumbprint from your terminal (for the password try the default one: android):
+
+```shell
+firebase_setup % keytool -list -v \           
+-alias androiddebugkey -keystore ~/.android/debug.keystore
+```
+
+2. Update Info.plist file for in the ./iOS/Runner folder (see: https://pub.dev/packages/google_sign_in):
+
+```
+<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
+<!-- Google Sign-in Section -->
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<!-- TODO Replace this value: -->
+			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+			<string>com.googleusercontent.apps.861823949799-vc35cprkp249096uujjn0vvnmcvjppkn</string>
+		</array>
+	</dict>
+</array>
+<!-- End of the Google Sign-in Section -->
+```
+
+If you forget this step or enter the wrong REVERSED_CLIENT_ID the iOS emulator will just crash without any clear error message.
+
+3. Setup Network Access for the Android Emulator:
+
+Apple menu > System Preferences > Network
+Add DNS Servers: 8.8.8.8 and 8.8.4.4
+
+## Running Locally
+
+You can use the ./assets/config/dev.json and prd.json files to configure which backend is used. The launch.json files contains run-profiles for vscode that set environment variables that are used to determine which config file (dev.json or prd.json) is read.
+
+If you want to use the Firebase Emulator to test the Authentication flow you first have to start it:
+
+```shell
+firebase emulators:start
+```
+
+To configure which emulators are started when running this command you can use 'firebase init' (see before).
+
+# Background
 
 The following sections show some more technical details on how the app was created and what is required to run it locally and remotely.
 

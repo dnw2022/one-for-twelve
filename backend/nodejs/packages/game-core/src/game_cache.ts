@@ -49,7 +49,7 @@ export class GameCache {
     console.log("GameCache.init => start");
     console.time();
 
-    const promises = [];
+    const promises : Promise<void>[] = [];
 
     if (GameCache.words === null) {
       console.log("Caching words");
