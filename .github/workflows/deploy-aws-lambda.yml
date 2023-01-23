@@ -45,4 +45,5 @@ jobs:
           dotnet lambda deploy-serverless \
             --stack-name $AWS_STACK_NAME \
             --s3-bucket $AWS_S3_BUCKET \
-            --region $AWS_REGION
+            --region $AWS_REGION \
+            --disable-version-check
