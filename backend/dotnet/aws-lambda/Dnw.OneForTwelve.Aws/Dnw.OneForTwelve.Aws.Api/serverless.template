@@ -7,6 +7,9 @@
   "Resources": {
     "AspNetCoreFunction": {
       "Type": "AWS::Serverless::Function",
+      "Metadata": {
+        "BuildMethod": "dotnet7"
+      },
       "Properties": {
         "FunctionName": "Dnw-OneForTwelve-Aws-Api",
         "Handler": "Dnw.OneForTwelve.Aws.Api",
