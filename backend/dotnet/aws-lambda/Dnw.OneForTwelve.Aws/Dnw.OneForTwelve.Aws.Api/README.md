@@ -2,6 +2,11 @@
 
 Amazon aws lambda implementation of the game api.
 
+Based on:
+
+https://github.com/aws-samples/serverless-dotnet-demo/tree/main/src/NET7NativeMinimalAPI
+https://www.youtube.com/watch?v=exRLCRHpvQE&t=199s
+
 # Deployment
 
 After initial setup (see below) you can create / update the aws lambda with this cli command:

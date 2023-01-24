@@ -1,3 +1,4 @@
+using Amazon.Lambda.Serialization.SystemTextJson;
 using Dnw.OneForTwelve.Core.Extensions;
 using Microsoft.AspNetCore.Http.Json;
 using Serilog;
@@ -56,6 +57,11 @@ public static class WebAppBuilder
         }
         
         services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+        
+        services.AddAWSLambdaHosting(LambdaEventSource.HttpApi, options =>
+        {
+            options.Serializer = new SourceGeneratorLambdaJsonSerializer<HttpApiJsonSerializerContext>();
+        });
 
         // Add services to the container.
 

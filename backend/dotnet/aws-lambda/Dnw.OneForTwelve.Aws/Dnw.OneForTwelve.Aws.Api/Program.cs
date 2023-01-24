@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Dnw.OneForTwelve.Core.Models;
 using Dnw.OneForTwelve.Core.Services;
 using JetBrains.Annotations;
@@ -36,10 +37,11 @@ internal class Program
                 }
     
                 var game = gameService.Start(language, questionSelectionStrategy);
+                
                 return game == null ? Results.BadRequest() : Results.Ok(game);
             });
 
-        WebAppBuilder.RequireAuthorization(new[] {homeRouteBuilder, startGameRouteBuilder});
+        // WebAppBuilder.RequireAuthorization(new[] {homeRouteBuilder, startGameRouteBuilder});
 
         app!.Run();
 

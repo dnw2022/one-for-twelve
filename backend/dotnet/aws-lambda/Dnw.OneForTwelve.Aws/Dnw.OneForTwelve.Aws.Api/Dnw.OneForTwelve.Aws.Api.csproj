@@ -7,6 +7,23 @@
     <RootNamespace>Dnw.OneForTwelve.Aws.Api</RootNamespace>
     <AssemblyName>bootstrap</AssemblyName>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+    <PublishAot>true</PublishAot>
+    <StripSymbols>true</StripSymbols>
+<!--    <TrimMode>partial</TrimMode>-->
+  </PropertyGroup>
+  
+  <ItemGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+    <TrimmerRootAssembly Include="Amazon.Lambda.APIGatewayEvents" />
+    <TrimmerRootAssembly Include="Amazon.Lambda.ApplicationLoadBalancerEvents" />
+    <TrimmerRootAssembly Include="Amazon.Lambda.AspNetCoreServer" />
+    <TrimmerRootAssembly Include="Amazon.Lambda.AspNetCoreServer.Hosting" />
+    <TrimmerRootAssembly Include="Amazon.Lambda.Core" />
+    <TrimmerRootAssembly Include="Amazon.Lambda.Logging.AspNetCore" />
+    <TrimmerRootAssembly Include="Amazon.Lambda.Serialization.SystemTextJson" />
+    <TrimmerRootAssembly Include="CsvHelper" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.5.0" />
